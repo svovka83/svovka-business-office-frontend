@@ -1,13 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios from "../../axios";
 
 export const fetchRegister = createAsyncThunk(
   "user/fetchRegister",
   async (params) => {
-    const { data } = await axios.post(
-      "http://localhost:5555/register",
-      params
-    );
+    const { data } = await axios.post("/register", params);
     return data;
   }
 );
