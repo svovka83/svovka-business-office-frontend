@@ -3,11 +3,11 @@ import React from "react";
 import axios from "../../axios";
 
 const Users = () => {
-  const [data, setData] = React.useState([]);
+  const [users, setUsers] = React.useState([]);
 
   React.useEffect(() => {
     axios.get("/users").then((res) => {
-      setData(res.data);
+      setUsers(res.data);
       console.log(res.data);
     });
   }, []);
@@ -15,7 +15,7 @@ const Users = () => {
   return (
     <div>
       <h1>Users</h1>
-      {data.map((user) => (
+      {users.map((user) => (
         <p>{user.fullName}</p>
       ))}
     </div>
