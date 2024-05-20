@@ -15,8 +15,8 @@ const Users = () => {
   return (
     <div>
       <h1>Users</h1>
-      {users.map((user) => (
-        <p>{user.fullName}</p>
+      {users.map((users) => (
+        <p key={users._id}><b>{users.fullName}</b> "{users.email}"</p>
       ))}
     </div>
   );

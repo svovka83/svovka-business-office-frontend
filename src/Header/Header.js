@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 
+import styles from "./Header.module.css";
+import { Button } from "@mui/material";
+
+
 const Header = () => {
   return (
-    <div>
-      <Link to="/">
-        <button>Home</button>
+    <div className={styles.header}>
+      <Link to="/home">
+        <Button variant="contained">Home</Button>
       </Link>
-      <Link to="/register">
-        <button>Registration</button>
+
+      <Link to="/login">
+        <Button variant="contained">Login</Button>
       </Link>
     </div>
   );

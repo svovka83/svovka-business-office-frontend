@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 import { fetchRegister } from "../../redux/slices/user";
+import { Button, Paper, TextField } from "@mui/material";
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const Registration = () => {
   const { register, handleSubmit } = useForm({
     defaultValues: {
       fullName: "",
+      email: "",
       password: "",
     },
   });
@@ -21,14 +23,22 @@ const Registration = () => {
 
   return (
     <div className={styles.Registration}>
-      <h1>Registration</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("fullName")} />
-        <br />
-        <input {...register("password")} />
-        <br />
-        <button type="submit">to register</button>
-      </form>
+      <Paper className={styles.paper}>
+        <h2>Registration</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <h3>FullName</h3>
+          <TextField {...register("fullName")} />
+          <h3>Email</h3>
+          <TextField {...register("email")} />
+          <h3>Password</h3>
+          <TextField {...register("password")} />
+          <br />
+          <br />
+          <Button type="submit" variant="contained">
+            register
+          </Button>
+        </form>
+      </Paper>
     </div>
   );
 };
