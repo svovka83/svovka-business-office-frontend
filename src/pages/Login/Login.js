@@ -19,6 +19,7 @@ const Login = () => {
 
   const onSubmit = (value) => {
     dispatch(fetchLogin(value));
+    console.log(value)
   };
 
   return (

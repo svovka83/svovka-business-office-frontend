@@ -37,12 +37,15 @@ const userSlice = createSlice({
 
     [fetchLogin.pending]: (state) => {
       state.data = null;
+      console.log("loading")
     },
     [fetchLogin.fulfilled]: (state, action) => {
       state.data = action.payload;
+      console.log("loaded")
     },
     [fetchLogin.rejected]: (state) => {
       state.data = null;
+      console.log("error")
     },
   },
 });
