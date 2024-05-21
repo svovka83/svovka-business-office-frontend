@@ -27,11 +27,11 @@ const Registration = () => {
         <h2>Registration</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h3>FullName</h3>
-          <TextField {...register("fullName")} />
+          <TextField {...register("fullName")} label="fullName"/>
           <h3>Email</h3>
-          <TextField {...register("email")} />
+          <TextField {...register("email")} label="email"/>
           <h3>Password</h3>
-          <TextField {...register("password")} />
+          <TextField {...register("password")} label="password"/>
           <br />
           <br />
           <Button type="submit" variant="contained">
