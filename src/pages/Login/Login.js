@@ -12,7 +12,7 @@ const Login = () => {
   const isAuth = Boolean(data);
   const dispatch = useDispatch();
 
-  console.log("isAuth", isAuth);
+  console.log("isAuth", isAuth, data);
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -22,16 +22,16 @@ const Login = () => {
   });
 
   const onSubmit = (value) => {
-    dispatch(fetchLogin(value));
+    const data = dispatch(fetchLogin(value));
+    if (!data) {
+      alert("failed to authorize");
+    }
   };
 
   if (isAuth) {
     const { token } = data;
     window.localStorage.setItem("token", token);
-    console.log(token);
-    if (token) {
-      return <Navigate to="/home" />;
-    }
+    return <Navigate to="/home" />;
   }
 
   return (

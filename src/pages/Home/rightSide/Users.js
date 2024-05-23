@@ -1,6 +1,6 @@
 import React from "react";
 
-import axios from "../../axios";
+import axios from "../../../axios";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -16,7 +16,6 @@ const Users = () => {
 
   return (
     <div>
-      <h1>Users</h1>
       {users.map((users) => (
         <p key={users._id}><b>{users.fullName}</b> "{users.email}"</p>
       ))}

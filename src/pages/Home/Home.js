@@ -1,21 +1,20 @@
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom";
 
-import { selectorFullData } from "../../redux/slices/users";
+import styles from "./Home.module.css";
 
-import { Button } from "@mui/material";
+import LeftSide from "./leftSide/LeftSide";
+import Users from "./rightSide/Users";
 
 const Home = () => {
-  const data = useSelector(selectorFullData);
-
-  console.log(data)
-
   return (
-    <div>
-      <h1>Welcome {data.fullName}</h1>
-      <Link to="/users">
-        <Button variant="outlined">Get all users</Button>
-      </Link>
+    <div className={styles.home}>
+      <LeftSide />
+      <div>
+        <h1>Users</h1>
+        <Routes>
+          <Route path="/users" element={<Users />} />
+        </Routes>
+      </div>
     </div>
   );
 };

@@ -17,6 +17,14 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
+export const fetchGetMe = createAsyncThunk(
+  "user/fetchGetMe",
+  async () => {
+    const { data } = await axios.get("/me");
+    return data;
+  }
+);
+
 const initialState = {
   data: null,
 };
@@ -50,6 +58,16 @@ const userSlice = createSlice({
       state.data = action.payload;
     });
     builder.addCase(fetchLogin.rejected, (state) => {
+      state.data = null;
+    });
+
+    builder.addCase(fetchGetMe.pending, (state) => {
+      state.data = null;
+    });
+    builder.addCase(fetchGetMe.fulfilled, (state, action) => {
+      state.data = action.payload;
+    });
+    builder.addCase(fetchGetMe.rejected, (state) => {
       state.data = null;
     });
   },
