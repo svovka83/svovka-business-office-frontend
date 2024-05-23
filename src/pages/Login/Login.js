@@ -1,14 +1,18 @@
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import styles from "./Login.module.css";
 import { Button, TextField, Paper } from "@mui/material";
-import { fetchLogin } from "../../redux/slices/user";
+import { fetchLogin, selectorFullData } from "../../redux/slices/users";
 
 const Login = () => {
+  const data = useSelector(selectorFullData);
+  const isAuth = Boolean(data);
   const dispatch = useDispatch();
+
+  console.log("isAuth", isAuth);
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -19,8 +23,16 @@ const Login = () => {
 
   const onSubmit = (value) => {
     dispatch(fetchLogin(value));
-    console.log(value)
   };
+
+  if (isAuth) {
+    const { token } = data;
+    window.localStorage.setItem("token", token);
+    console.log(token);
+    if (token) {
+      return <Navigate to="/home" />;
+    }
+  }
 
   return (
     <>

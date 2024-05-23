@@ -1,8 +1,14 @@
+import styles from "./Start.module.css";
+
 const Start = () => {
   return (
     <div>
       <h1>Welcome to site!</h1>
-      <h3>What would like to do?</h3>
+      <img
+        className={styles.start_image}
+        src="DSC00237.JPG"
+        alt="start content"
+      />
     </div>
   );
 };

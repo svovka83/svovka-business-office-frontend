@@ -25,29 +25,37 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    [fetchRegister.pending]: (state) => {
+    logOut: (state) => {
       state.data = null;
-    },
-    [fetchRegister.fulfilled]: (state, action) => {
-      state.data = action.payload;
-    },
-    [fetchRegister.rejected]: (state) => {
-      state.data = null;
-    },
-
-    [fetchLogin.pending]: (state) => {
-      state.data = null;
-      console.log("loading")
-    },
-    [fetchLogin.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      console.log("loaded")
-    },
-    [fetchLogin.rejected]: (state) => {
-      state.data = null;
-      console.log("error")
     },
   },
+  selectors: {
+    selectorFullData: (state) => state.data,
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchRegister.pending, (state) => {
+      state.data = null;
+    });
+    builder.addCase(fetchRegister.fulfilled, (state, action) => {
+      state.data = action.payload;
+    });
+    builder.addCase(fetchRegister.rejected, (state) => {
+      state.data = null;
+    });
+
+    builder.addCase(fetchLogin.pending, (state) => {
+      state.data = null;
+    });
+    builder.addCase(fetchLogin.fulfilled, (state, action) => {
+      state.data = action.payload;
+    });
+    builder.addCase(fetchLogin.rejected, (state) => {
+      state.data = null;
+    });
+  },
 });
+
+export const { selectorFullData } = userSlice.selectors;
+export const { logOut } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
