@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 
 import { selectorFullData } from "../../../redux/slices/users";
 
-import styles from "./LeftSide.module.css";
+import styles from "./SideBar.module.css";
 import { Button } from "@mui/material";
 
-export const LeftSide = () => {
+export const SideBar = () => {
   const data = useSelector(selectorFullData);
 
   return (
-    <div>
+    <div className={styles.side_bar}>
       <h1 className={styles.welcome}>Welcome {data.fullName}</h1>
       <Link to="/home/users">
         <Button variant="contained">Get all users</Button>
@@ -26,4 +26,4 @@ export const LeftSide = () => {
   );
 };
 
-export default LeftSide;
+export default SideBar;

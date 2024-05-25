@@ -1,3 +1,4 @@
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,20 +13,20 @@ const Login = () => {
   const isAuth = Boolean(data);
   const dispatch = useDispatch();
 
-  console.log("isAuth", isAuth, data);
-
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
+    mode: "onBlur",
   });
 
   const onSubmit = (value) => {
-    const data = dispatch(fetchLogin(value));
-    if (!data) {
-      alert("failed to authorize");
-    }
+    dispatch(fetchLogin(value));
   };
 
   if (isAuth) {
@@ -40,12 +41,36 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <h2>Login</h2>
           <h3>Email</h3>
-          <TextField label="email" {...register("email")} />
+          <TextField
+            label="email"
+            {...register("email", { required: "input email" })}
+            helperText={errors.email?.message}
+            error={errors.email?.message}
+          />
           <h3>Password</h3>
-          <TextField label="password" {...register("password")} />
+          <TextField
+            label="password"
+            type="password"
+            {...register("password", {
+              required: {
+                value: true,
+                message: "input password",
+              },
+              minLength: {
+                value: 4,
+                message: "input min 4 symbol",
+              },
+              maxLength: {
+                value: 15,
+                message: "max 15 symbol",
+              },
+            })}
+            helperText={errors.password?.message}
+            error={errors.password?.message}
+          />
           <br />
           <br />
-          <Button type="submit" variant="contained">
+          <Button type="submit" disabled={!isValid} variant="contained">
             Login
           </Button>
         </form>

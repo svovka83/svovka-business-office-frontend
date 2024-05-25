@@ -1,7 +1,9 @@
 .header {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  padding-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  background: #b4b4b4;
 }
 
 h1, h3 {

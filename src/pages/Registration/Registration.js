@@ -13,12 +13,17 @@ const Registration = () => {
   const data = useSelector(selectorFullData);
   const isAuth = Boolean(data);
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
     defaultValues: {
       fullName: "",
       email: "",
       password: "",
     },
+    mode: "onBlur",
   });
 
   const onSubmit = (values) => {
@@ -28,9 +33,7 @@ const Registration = () => {
   if (isAuth) {
     const { token } = data;
     window.localStorage.setItem("token", token);
-    if (token) {
-      return <Navigate to="/home" />;
-    }
+    return <Navigate to="/home" />;
   }
 
   return (
@@ -39,14 +42,61 @@ const Registration = () => {
         <h2>Registration</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h3>FullName</h3>
-          <TextField {...register("fullName")} label="fullName" />
+          <TextField
+            label="fullName"
+            {...register("fullName", {
+              required: {
+                value: true,
+                message: "input fullName",
+              },
+              minLength: {
+                value: 4,
+                message: "fullName min 4 symbol",
+              },
+              maxLength: {
+                value: 10,
+                message: "max 10 symbol",
+              },
+            })}
+            helperText={errors.fullName?.message}
+            error={errors.fullName?.message}
+          />
           <h3>Email</h3>
-          <TextField {...register("email")} label="email" />
+          <TextField
+            label="email"
+            {...register("email", {
+              required: {
+                value: true,
+                message: "input email",
+              },
+            })}
+            helperText={errors.email?.message}
+            error={errors.email?.message}
+          />
           <h3>Password</h3>
-          <TextField {...register("password")} label="password" />
+          <TextField
+            label="password"
+            type="password"
+            {...register("password", {
+              required: {
+                value: true,
+                message: "input password",
+              },
+              minLength: {
+                value: 4,
+                message: "input min 4 symbol",
+              },
+              maxLength: {
+                value: 15,
+                message: "max 15 symbol",
+              },
+            })}
+            helperText={errors.password?.message}
+            error={errors.password?.message}
+          />
           <br />
           <br />
-          <Button type="submit" variant="contained">
+          <Button type="submit" disabled={!isValid} variant="contained">
             register
           </Button>
         </form>

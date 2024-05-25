@@ -17,13 +17,10 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
-export const fetchGetMe = createAsyncThunk(
-  "user/fetchGetMe",
-  async () => {
-    const { data } = await axios.get("/me");
-    return data;
-  }
-);
+export const fetchGetMe = createAsyncThunk("user/fetchGetMe", async () => {
+  const { data } = await axios.get("/me");
+  return data;
+});
 
 const initialState = {
   data: null,
