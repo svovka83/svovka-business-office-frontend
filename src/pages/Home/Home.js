@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import styles from "./Home.module.css";
 
 import SideBar from "./sideBar/SideBar";
-import Posts from "./content/Posts";
+import Posts from "./content/Posts/Posts";
 import CreatePost from "./content/CreatePost";
 import Users from "./content/Users";
 

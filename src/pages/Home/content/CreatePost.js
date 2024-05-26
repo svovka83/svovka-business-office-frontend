@@ -19,15 +19,19 @@ const CreatePost = () => {
   };
 
   const createPost = async () => {
-    const fields = {
-      title,
-      text,
-    };
-    const { data } = await axios.post("/posts", fields);
-    console.log(data);
-    setTitle("");
-    setText("");
-    navigate("/home/posts");
+    try {
+      const fields = {
+        title,
+        text,
+      };
+      const { data } = await axios.post("/posts", fields);
+      console.log(data);
+      setTitle("");
+      setText("");
+      navigate("/home/posts");
+    } catch (err) {
+      alert("failed to create post");
+    }
   };
 
   return (
