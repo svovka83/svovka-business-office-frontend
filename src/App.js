@@ -10,7 +10,7 @@ import Registration from "./pages/Registration/Registration";
 
 import styles from "./App.module.css";
 
-import { fetchGetMe } from "./redux/slices/users";
+import { fetchGetMe } from "./redux/slices/usersSlice";
 
 function App() {
 const dispatch = useDispatch()

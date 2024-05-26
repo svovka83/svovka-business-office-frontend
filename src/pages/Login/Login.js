@@ -6,7 +6,7 @@ import { Link, Navigate } from "react-router-dom";
 
 import styles from "./Login.module.css";
 import { Button, TextField, Paper } from "@mui/material";
-import { fetchLogin, selectorFullData } from "../../redux/slices/users";
+import { fetchLogin, selectorFullData } from "../../redux/slices/usersSlice";
 
 const Login = () => {
   const data = useSelector(selectorFullData);

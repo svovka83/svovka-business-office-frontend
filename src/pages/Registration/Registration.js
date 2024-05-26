@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-import { fetchRegister, selectorFullData } from "../../redux/slices/users";
+import { fetchRegister, selectorFullData } from "../../redux/slices/usersSlice";
 
 import { Button, Paper, TextField } from "@mui/material";
 

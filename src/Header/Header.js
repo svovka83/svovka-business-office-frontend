@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { selectorFullData, logOut } from "../redux/slices/users";
+import { selectorFullData, logOut } from "../redux/slices/usersSlice";
 
 import styles from "./Header.module.css";
 import { Button } from "@mui/material";
