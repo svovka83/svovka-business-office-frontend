@@ -13,8 +13,8 @@ import CreatePost from "./content/Posts/CreatePost";
 import Post from "./content/Posts/Post/Post";
 import Users from "./content/Users/Users";
 
-import Calculator from "./content/ProgramsContent/Calculator";
-import Timer from "./content/ProgramsContent/Timer";
+import Calculator from "./content/ProgramsContent/Calculator/Calculator";
+import Timer from "./content/ProgramsContent/Timer/Timer";
 
 const Home = () => {
   const data = useSelector(selectorFullData);

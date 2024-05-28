@@ -25,10 +25,10 @@ const CreatePost = () => {
         text,
       };
       const { data } = await axios.post("/posts", fields);
-      console.log(data);
       setTitle("");
       setText("");
-      navigate("/home/posts");
+      const id = data._id
+      navigate(`/home/posts/${id}`);
     } catch (err) {
       alert("failed to create post");
     }

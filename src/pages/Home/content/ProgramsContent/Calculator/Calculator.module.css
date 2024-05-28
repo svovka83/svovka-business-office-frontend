@@ -1,0 +1,21 @@
+.calculator {
+  display: grid;
+  width: 65%;
+  margin: 0 auto;
+  padding-top: 10px;
+  grid-template-areas:
+    "1fr 1fr 1fr 1fr"
+    "1fr 1fr 1fr 1fr"
+    "1fr 1fr 1fr 1fr"
+    "1fr 1fr 1fr 1fr"
+}
+
+.calculator>h1 {
+  background-color: #eee;
+  margin: 5px;
+  padding: 10px 0px;
+  border: 2px solid black;
+  border-radius: 10px;
+  align-items: center;
+  cursor: pointer;
+}
