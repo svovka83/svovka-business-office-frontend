@@ -1,6 +1,6 @@
 import React from "react";
 
-import axios from "../../../axios";
+import axios from "../../../../axios";
 
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -18,10 +18,14 @@ const Users = () => {
     <div>
       <h2>Users</h2>
       {users.map((users) => (
-        <p key={users._id}><b>{users.fullName}</b> "{users.email}"</p>
+        <p key={users._id}>
+          <b>{users.fullName}</b> "{users.email}"
+        </p>
       ))}
       <Link to="/home">
-      <Button variant="contained" color="inherit">Back</Button>
+        <Button variant="contained" color="inherit">
+          Back
+        </Button>
       </Link>
     </div>
   );

@@ -36,7 +36,11 @@ const Posts = () => {
       {posts.map((posts) => (
         <div key={posts._id}>
           <h3>{posts.title}</h3>
-          <p>{posts.text}</p>
+          <Link to={`/home/posts/${posts._id}`}>
+            <Button variant="contained" color="info">
+              go to post
+            </Button>
+          </Link>
         </div>
       ))}
     </div>

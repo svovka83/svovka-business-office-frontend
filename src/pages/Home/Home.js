@@ -4,8 +4,9 @@ import styles from "./Home.module.css";
 
 import SideBar from "./sideBar/SideBar";
 import Posts from "./content/Posts/Posts";
-import CreatePost from "./content/CreatePost";
-import Users from "./content/Users";
+import CreatePost from "./content/Posts/CreatePost";
+import Post from "./content/Posts/Post/Post";
+import Users from "./content/Users/Users";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
         <Routes>
           <Route path="/posts" element={<Posts />} />
           <Route path="/create_post" element={<CreatePost />} />
+          <Route path="/posts/:id" element={<Post />} />
           <Route path="/users" element={<Users />} />
         </Routes>
       </div>
