@@ -1,4 +1,10 @@
 .home {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.welcome {
+  background: #eee;
+  margin: 0;
+  padding-bottom: 10px;
 }

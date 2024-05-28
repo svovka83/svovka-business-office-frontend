@@ -1,43 +1,36 @@
 import { Link } from "react-router-dom";
 
-import styles from "./SideBar.module.css";
+import styles from "./Programs.module.css";
 import { Button } from "@mui/material";
 
-export const SideBar = () => {
+const Programs = () => {
   return (
     <div className={styles.side_bar}>
-      <Link to="/home/posts">
+      <Link to="/home/programs/calculator">
         <Button variant="contained" color="info" className={styles.button_size}>
-          Posts
+          Calculator
         </Button>
       </Link>
       <br />
       <br />
-      <Link to="/home/users">
+      <Link to="/home/programs/timer">
         <Button variant="contained" color="info" className={styles.button_size}>
-          Users
+          Timer
         </Button>
       </Link>
       <br />
       <br />
-      <Link to="/home/programs">
-        <Button variant="contained" color="info" className={styles.button_size}>
-          Programs
-        </Button>
-      </Link>
-      <br />
-      <br />
-      <Link to="/">
+      <Link to="/home">
         <Button
           variant="contained"
           color="inherit"
           className={styles.button_size}
         >
-          to start page
+          back
         </Button>
       </Link>
     </div>
   );
 };
 
-export default SideBar;
+export default Programs;
