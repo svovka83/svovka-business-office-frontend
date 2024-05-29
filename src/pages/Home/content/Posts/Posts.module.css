@@ -3,3 +3,12 @@
     grid-template-columns: 1fr 1fr 1fr;
     margin-top: 20px;
 }
+
+.posts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 5px;
+    margin: 10px;
+    border: 2px solid;
+    border-radius: 5px;
+}

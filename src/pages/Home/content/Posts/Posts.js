@@ -34,13 +34,15 @@ const Posts = () => {
         </Link>
       </div>
       {posts.map((posts) => (
-        <div key={posts._id}>
+        <div key={posts._id} className={styles.posts}>
           <h3>{posts.title}</h3>
-          <Link to={`/home/posts/${posts._id}`}>
-            <Button variant="contained" color="info">
-              go to post
-            </Button>
-          </Link>
+          <div>
+            <Link to={`/home/posts/${posts._id}`}>
+              <Button variant="contained" color="info">
+                go to post
+              </Button>
+            </Link>
+          </div>
         </div>
       ))}
     </div>
