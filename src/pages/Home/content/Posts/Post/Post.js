@@ -70,13 +70,16 @@ const Post = () => {
           </Button>
         </Link>
       </div>
-      <h3>
-        {isEditable ? (
-          <input onChange={changeTitle} value={title} />
-        ) : (
-          data.title
-        )}
-      </h3>
+      <div className={styles.title}>
+        <h3>
+          {isEditable ? (
+            <input onChange={changeTitle} value={title} />
+          ) : (
+            data.title
+          )}
+        </h3>
+        <span>views: {data.viewCount}</span>
+      </div>
       <p>
         {isEditable ? (
           <textarea

@@ -35,6 +35,7 @@ const Posts = () => {
       </div>
       {posts.map((posts) => (
         <div key={posts._id} className={styles.posts}>
+          <span><b>views: {posts.viewCount}</b></span>
           <h3>{posts.title}</h3>
           <div>
             <Link to={`/home/posts/${posts._id}`}>
@@ -42,6 +43,7 @@ const Posts = () => {
                 go to post
               </Button>
             </Link>
+            
           </div>
         </div>
       ))}
