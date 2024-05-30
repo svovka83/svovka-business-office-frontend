@@ -1,6 +1,7 @@
 import React from "react";
 
 import styles from "./Timer.module.css";
+import { Button } from "@mui/material";
 
 const Timer = () => {
   let [seconds, setSeconds] = React.useState(0);
@@ -52,9 +53,13 @@ const Timer = () => {
     }
   };
 
-  const startTimer = () => {
-    setInterval(() => {
-      if (seconds !== 0) {
+  let startTimer = () => {
+    let timer = setInterval(() => {
+      if (seconds === 0 && minutes === 0 && hour === 0) {
+        clearInterval(timer);
+        console.log("timer stoped");
+        alert("timer stoped");
+      } else if (seconds !== 0) {
         seconds = seconds - 1;
         setSeconds(seconds);
       } else if (minutes === 0) {
@@ -77,6 +82,7 @@ const Timer = () => {
     setSeconds(0);
     setMinutes(0);
     setHour(0);
+    // startTimer();
   };
 
   console.log(hour, minutes, seconds);
@@ -104,9 +110,15 @@ const Timer = () => {
         </span>
       </p>
       <div>
-        <button onClick={startTimer}>Start</button>
-        <button>Stop</button>
-        <button onClick={resetTimer}>Reset</button>
+        <Button variant="contained" color="success" onClick={startTimer}>
+          Start
+        </Button>{" "}
+        <Button variant="contained" color="warning">
+          Stop
+        </Button>{" "}
+        <Button variant="contained" color="error" onClick={resetTimer}>
+          Reset
+        </Button>
       </div>
     </div>
   );
