@@ -37,15 +37,24 @@ const Post = () => {
     setText(data.text);
     setIsEditable(true);
   };
-
   const updatePost = async () => {
     const fields = {
       title,
       text,
+      viewCount: data.viewCount - 1,
     };
     await axios.put(`/posts/${id}`, fields);
     setIsEditable(false);
     axios.get(`/posts/${id}`).then((res) => setData(res.data));
+  };
+
+  const addLikes = async () => {
+    const fields = {
+      likes: data.likes + 1,
+      viewCount: data.viewCount - 1,
+    };
+    await axios.put(`/posts/${id}`, fields);
+    await axios.get(`/posts/${id}`).then((res) => setData(res.data));
   };
 
   const removePost = async () => {
@@ -78,7 +87,7 @@ const Post = () => {
             data.title
           )}
         </h3>
-        <span>views: {data.viewCount}</span>
+        <span>views: 👁️‍🗨️ {data.viewCount}</span>
       </div>
       <p>
         {isEditable ? (
@@ -91,18 +100,25 @@ const Post = () => {
           <p className={styles.text}>{data.text}</p>
         )}
       </p>
-      {isEditable ? (
-        <Button onClick={updatePost} variant="contained" color="success">
-          Send
-        </Button>
-      ) : (
-        <Button onClick={forEdit} variant="contained" color="warning">
-          Edit
-        </Button>
-      )}{" "}
-      <Button onClick={removePost} variant="contained" color="error">
-        Delete
-      </Button>
+      <div className={styles.management}>
+        <span onClick={addLikes} className={styles.likes}>
+          likes: ❤️ {data.likes}
+        </span>
+        <div>
+          {isEditable ? (
+            <Button onClick={updatePost} variant="contained" color="success">
+              Send
+            </Button>
+          ) : (
+            <Button onClick={forEdit} variant="contained" color="warning">
+              Edit
+            </Button>
+          )}{" "}
+          <Button onClick={removePost} variant="contained" color="error">
+            Delete
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

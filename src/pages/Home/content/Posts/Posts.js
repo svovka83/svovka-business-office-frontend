@@ -33,12 +33,13 @@ const Posts = () => {
           </Button>
         </Link>
       </div>
-      {posts.map((posts) => (
-        <div key={posts._id} className={styles.posts}>
-          <span><b>views: {posts.viewCount}</b></span>
-          <h3>{posts.title}</h3>
+      {posts.map((post) => (
+        <div key={post._id} className={styles.posts}>
+          <h3>{post.title}</h3>
+          <span><b>views: 👁️‍🗨️ {post.viewCount}</b></span>
+          <span><b>likes: ❤️ {post.likes}</b></span>
           <div>
-            <Link to={`/home/posts/${posts._id}`}>
+            <Link to={`/home/posts/${post._id}`}>
               <Button variant="contained" color="info">
                 go to post
               </Button>
