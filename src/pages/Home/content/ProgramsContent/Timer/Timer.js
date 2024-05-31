@@ -7,6 +7,7 @@ const Timer = () => {
   let [seconds, setSeconds] = React.useState(0);
   let [minutes, setMinutes] = React.useState(0);
   let [hour, setHour] = React.useState(0);
+  let [disabled, setDisabled] = React.useState(false);
 
   const addSeconds = () => {
     if (seconds === 59) {
@@ -53,12 +54,13 @@ const Timer = () => {
     }
   };
 
-  let startTimer = () => {
+  const startTimer = () => {
+    setDisabled(true);
     let timer = setInterval(() => {
       if (seconds === 0 && minutes === 0 && hour === 0) {
         clearInterval(timer);
-        console.log("timer stoped");
         alert("timer stoped");
+        setDisabled(false);
       } else if (seconds !== 0) {
         seconds = seconds - 1;
         setSeconds(seconds);
@@ -82,7 +84,6 @@ const Timer = () => {
     setSeconds(0);
     setMinutes(0);
     setHour(0);
-    // startTimer();
   };
 
   console.log(hour, minutes, seconds);
@@ -113,10 +114,15 @@ const Timer = () => {
         <Button variant="contained" color="success" onClick={startTimer}>
           Start
         </Button>{" "}
-        <Button variant="contained" color="warning">
+        {/* <Button variant="contained" color="warning">
           Stop
-        </Button>{" "}
-        <Button variant="contained" color="error" onClick={resetTimer}>
+        </Button>{" "} */}
+        <Button
+          disabled={disabled}
+          variant="contained"
+          color="error"
+          onClick={resetTimer}
+        >
           Reset
         </Button>
       </div>
