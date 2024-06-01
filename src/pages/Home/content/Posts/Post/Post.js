@@ -4,7 +4,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "../../../../../axios";
 
 import styles from "./Post.module.css";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 const Post = () => {
   const { id } = useParams();
@@ -82,7 +82,11 @@ const Post = () => {
       <div className={styles.title}>
         <h3>
           {isEditable ? (
-            <input onChange={changeTitle} value={title} />
+            <TextField
+              onChange={changeTitle}
+              value={title}
+              variant="standard"
+            />
           ) : (
             data.title
           )}
@@ -91,10 +95,12 @@ const Post = () => {
       </div>
       <p>
         {isEditable ? (
-          <textarea
+          <TextField
             onChange={changeText}
             value={text}
-            className={styles.text}
+            className={styles.text_edit}
+            multiline
+            rows={4}
           />
         ) : (
           <p className={styles.text}>{data.text}</p>

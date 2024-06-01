@@ -9,7 +9,7 @@ import SideBar from "./sideBar/SideBar";
 import Programs from "./sideBar/Programs/Programs";
 
 import Posts from "./content/Posts/Posts";
-import CreatePost from "./content/Posts/CreatePost";
+import CreatePost from "./content/Posts/CreatePost/CreatePost";
 import Post from "./content/Posts/Post/Post";
 import Users from "./content/Users/Users";
 
