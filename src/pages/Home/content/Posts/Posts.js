@@ -27,7 +27,7 @@ const Posts = () => {
             Create post
           </Button>
         </Link>
-        <h2>Posts</h2>
+        <h3>Posts</h3>
         <Link to="/home">
           <Button variant="contained" color="inherit">
             Back
@@ -36,7 +36,7 @@ const Posts = () => {
       </div>
       {posts.map((post) => (
         <div key={post._id} className={styles.posts}>
-          <h3>{post.title}</h3>
+          <h4>{post.title}</h4>
           <span>
             <b>views: 👁️‍🗨️ {post.viewCount}</b>
           </span>
