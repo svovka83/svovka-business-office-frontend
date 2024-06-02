@@ -1,60 +1,34 @@
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
+import PostEdit from "./PostEdit/PostEdit";
+
 import axios from "../../../../../axios";
 
 import styles from "./Post.module.css";
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 
 const Post = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [isEditable, setIsEditable] = React.useState(false);
-
   React.useEffect(() => {
-    axios
-      .get(`/posts/${id}`)
-      .then((res) => setData(res.data))
-      .catch((err) => {
-        console.warn(err);
-        alert("can not found post");
-      });
+    axios.get(`/posts/${id}`).then((res) => setPost(res.data));
   }, [id]);
 
-  const [data, setData] = React.useState({});
-  const [title, setTitle] = React.useState();
-  const [text, setText] = React.useState();
-
-  const changeTitle = (event) => {
-    setTitle(event.target.value);
-  };
-  const changeText = (event) => {
-    setText(event.target.value);
-  };
-  const forEdit = () => {
-    setTitle(data.title);
-    setText(data.text);
-    setIsEditable(true);
-  };
-  const updatePost = async () => {
-    const fields = {
-      title,
-      text,
-      viewCount: data.viewCount - 1,
-    };
-    await axios.put(`/posts/${id}`, fields);
-    setIsEditable(false);
-    axios.get(`/posts/${id}`).then((res) => setData(res.data));
-  };
+  const [post, setPost] = React.useState({});
 
   const addLikes = async () => {
     const fields = {
-      likes: data.likes + 1,
-      viewCount: data.viewCount - 1,
+      likes: post.likes + 1,
+      viewCount: post.viewCount - 1,
     };
     await axios.put(`/posts/${id}`, fields);
-    await axios.get(`/posts/${id}`).then((res) => setData(res.data));
+    await axios.get(`/posts/${id}`).then((res) => setPost(res.data));
+  };
+
+  const updateScreen = () => {
+    axios.get(`/posts/${id}`).then((res) => setPost(res.data));
   };
 
   const removePost = async () => {
@@ -69,7 +43,7 @@ const Post = () => {
       <div className={styles.header_post}>
         <Link to="/home/create_post">
           <Button variant="contained" color="info">
-            Create post
+            Create
           </Button>
         </Link>
         <h2>Post</h2>
@@ -79,52 +53,18 @@ const Post = () => {
           </Button>
         </Link>
       </div>
-      <div className={styles.title}>
-        <h3>
-          {isEditable ? (
-            <TextField
-              onChange={changeTitle}
-              value={title}
-              variant="standard"
-            />
-          ) : (
-            data.title
-          )}
-        </h3>
-        <span>views: 👁️‍🗨️ {data.viewCount}</span>
-      </div>
-      <p>
-        {isEditable ? (
-          <TextField
-            onChange={changeText}
-            value={text}
-            className={styles.text_edit}
-            multiline
-            rows={4}
-          />
-        ) : (
-          <p className={styles.text}>{data.text}</p>
-        )}
-      </p>
-      <div className={styles.management}>
-        <span onClick={addLikes} className={styles.likes}>
-          likes: ❤️ {data.likes}
-        </span>
-        <div>
-          {isEditable ? (
-            <Button onClick={updatePost} variant="contained" color="success">
-              Send
-            </Button>
-          ) : (
-            <Button onClick={forEdit} variant="contained" color="warning">
-              Edit
-            </Button>
-          )}{" "}
-          <Button onClick={removePost} variant="contained" color="error">
-            Delete
-          </Button>
-        </div>
-      </div>
+      <PostEdit
+        id={id}
+        userId={post.userId}
+        userName={post.userName}
+        title={post.title}
+        text={post.text}
+        viewCount={post.viewCount}
+        likes={post.likes}
+        addLikes={addLikes}
+        updateScreen={updateScreen}
+        removePost={removePost}
+      />
     </div>
   );
 };

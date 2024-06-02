@@ -18,8 +18,8 @@ import Calculator from "./content/ProgramsContent/Calculator/Calculator";
 import Timer from "./content/ProgramsContent/Timer/Timer";
 
 const Home = () => {
-  const [screen, setScreen] = React.useState(true);
   const data = useSelector(selectorFullData);
+  const [screen, setScreen] = React.useState(true);
 
   React.useEffect(() => {
     if (window.innerWidth < 600) {

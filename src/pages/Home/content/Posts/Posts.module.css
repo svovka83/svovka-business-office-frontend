@@ -6,9 +6,8 @@
 }
 
 .posts {
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
+display: grid;
+grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
     background-color: #eee;
     padding: 5px;
     margin: 10px 20px;

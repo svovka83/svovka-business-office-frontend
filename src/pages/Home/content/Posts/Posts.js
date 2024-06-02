@@ -24,10 +24,10 @@ const Posts = () => {
       <div className={styles.header_posts}>
         <Link to="/home/create_post">
           <Button variant="contained" color="info">
-            Create post
+            Create
           </Button>
         </Link>
-        <h3>Posts</h3>
+        <h2>Posts</h2>
         <Link to="/home">
           <Button variant="contained" color="inherit">
             Back
@@ -38,6 +38,9 @@ const Posts = () => {
         <div key={post._id} className={styles.posts}>
           <h4>{post.title}</h4>
           <span>
+            <b>author: {post.userName}</b>
+          </span>
+          <span>
             <b>views: 👁️‍🗨️ {post.viewCount}</b>
           </span>
           <span>
@@ -46,7 +49,7 @@ const Posts = () => {
           <div>
             <Link to={`/home/posts/${post._id}`}>
               <Button variant="contained" color="info">
-                go to post
+                read
               </Button>
             </Link>
           </div>
