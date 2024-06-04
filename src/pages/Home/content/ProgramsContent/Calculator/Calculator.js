@@ -75,9 +75,11 @@ const Calculator = () => {
   };
   return (
     <div>
+      <div className={styles.calculator}>
       <h2>Calculator</h2>
       <TextField value={state} disabled />
-      <div className={styles.calculator}>
+      </div>
+      <div className={styles.buttons}>
         <h1 onClick={one}>1</h1>
         <h1 onClick={two}>2</h1>
         <h1 onClick={tree}>3</h1>

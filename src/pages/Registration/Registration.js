@@ -37,7 +37,7 @@ const Registration = () => {
   }
 
   return (
-    <div>
+    <div className={styles.register}>
       <Paper className={styles.paper}>
         <h2>Registration</h2>
         <form onSubmit={handleSubmit(onSubmit)}>

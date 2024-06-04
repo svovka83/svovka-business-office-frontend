@@ -11,16 +11,16 @@ import { Button, TextField } from "@mui/material";
 const PostEdit = (props) => {
   const data = useSelector(selectorFullData);
 
-  const [isEditable, setIsEditable] = React.useState(false);
-  const [disabled, setDisabled] = React.useState(true);
-  const [title, setTitle] = React.useState();
-  const [text, setText] = React.useState();
-
   React.useEffect(() => {
     if (data._id === props.userId) {
       setDisabled(false);
     }
   }, [data._id, props.userId]);
+
+  const [isEditable, setIsEditable] = React.useState(false);
+  const [disabled, setDisabled] = React.useState(true);
+  const [title, setTitle] = React.useState();
+  const [text, setText] = React.useState();
 
   const changeTitle = (event) => {
     setTitle(event.target.value);
@@ -43,7 +43,9 @@ const PostEdit = (props) => {
     };
     await axios.put(`/posts/${props.id}`, fields);
     setIsEditable(false);
-    axios.get(`/posts/${props.id}`).then((res) => props.setPost(res.data));
+    await axios
+      .get(`/posts/${props.id}`)
+      .then((res) => props.setPost(res.data));
   };
 
   const addLikes = async () => {
@@ -52,11 +54,13 @@ const PostEdit = (props) => {
       viewCount: props.viewCount - 1,
     };
     await axios.put(`/posts/${props.id}`, fields);
-    await axios.get(`/posts/${props.id}`).then((res) => props.setPost(res.data));
+    await axios
+      .get(`/posts/${props.id}`)
+      .then((res) => props.setPost(res.data));
   };
 
   return (
-    <div>
+    <div className={styles.post}>
       <div className={styles.title}>
         <span>author: {props.userName}</span>
         <h3>
@@ -70,26 +74,8 @@ const PostEdit = (props) => {
             props.title
           )}
         </h3>
-        <span>views: 👁️‍🗨️ {props.viewCount}</span>
-      </div>
-      <p>
-        {isEditable ? (
-          <TextField
-            onChange={changeText}
-            value={text}
-            className={styles.text_edit}
-            multiline
-            rows={4}
-          />
-        ) : (
-          <p className={styles.text}>{props.text}</p>
-        )}
-      </p>
-      <div className={styles.management}>
-        <span onClick={addLikes} className={styles.likes}>
-          likes: ❤️ {props.likes}
-        </span>
         <div>
+          {" "}
           {isEditable ? (
             <Button onClick={updatePost} variant="contained" color="success">
               Send
@@ -113,6 +99,27 @@ const PostEdit = (props) => {
             Delete
           </Button>
         </div>
+      </div>
+      <p>
+        <div  className={styles.text}>
+        {isEditable ? (
+            <TextField
+              onChange={changeText}
+              value={text}
+              multiline
+              rows={4}
+              fullWidth
+            />
+            ) : (
+              <p>{props.text}</p>
+              )}
+              </div>
+      </p>
+      <div className={styles.management}>
+        <span onClick={addLikes} className={styles.likes}>
+          likes: ❤️ {props.likes}
+        </span>
+        <span>views: 👁️‍🗨️ {props.viewCount}</span>
       </div>
     </div>
   );

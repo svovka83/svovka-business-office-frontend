@@ -1,5 +1,10 @@
 .calculator {
+  margin-left: 10%;
+}
+
+.buttons {
   display: grid;
+  text-align: center;
   width: 85%;
   margin: 0 auto;
   padding-top: 10px;
@@ -10,7 +15,7 @@
     "1fr 1fr 1fr 1fr"
 }
 
-.calculator>h1 {
+.buttons>h1 {
   background-color: #eee;
   margin: 5px;
   padding: 10px 0px;

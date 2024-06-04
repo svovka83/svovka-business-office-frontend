@@ -8,8 +8,6 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 
-import styles from "./App.module.css";
-
 import { fetchGetMe } from "./redux/slices/usersSlice";
 
 function App() {
@@ -20,7 +18,7 @@ React.useEffect(() => {
 },[dispatch])
 
   return (
-    <div className={styles.App}>
+    <div>
       <Header />
       <Routes>
         <Route path="/" element={<Start />} />

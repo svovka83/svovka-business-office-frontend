@@ -86,11 +86,9 @@ const Timer = () => {
     setHour(0);
   };
 
-  console.log(hour, minutes, seconds);
-
   return (
     <div>
-      <h2>Timer</h2>
+      <h2 className={styles.timer}>Timer</h2>
       <p className={styles.screen_timer}>
         <span className={styles.setting_timer}>
           <span onClick={addHour}>⬆︎</span>
@@ -110,7 +108,7 @@ const Timer = () => {
           <span onClick={minusSeconds}>⬇︎</span>
         </span>
       </p>
-      <div>
+      <div className={styles.timer}>
         <Button variant="contained" color="success" onClick={startTimer}>
           Start
         </Button>{" "}

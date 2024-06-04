@@ -25,20 +25,22 @@ export const PostComments = () => {
 
   return (
     <div>
-      <form>
-        <h3>Comment</h3>
-        <TextField onChange={changeComment} value={text} multiline />
+      <form className={styles.comment}>
+        <TextField onChange={changeComment} value={text} multiline fullWidth />
         <br />
-        <br />
-        <Button onClick={createComment} variant="contained" color="success">
-          Send
-        </Button>
+        <div className={styles.footer_comment}>
+          <h3>Comment</h3>
+          <Button onClick={createComment} variant="contained" color="success">
+            Send
+          </Button>
+        </div>
       </form>
       <div>
         {comments.map((c) => (
-          <p>
-            <b>{c.userName}</b> {c.comment}
-          </p>
+          <div key={c._id} className={styles.comments}>
+            <h4>{c.userName}</h4>
+            <p>{c.comment}</p>
+          </div>
         ))}
       </div>
     </div>

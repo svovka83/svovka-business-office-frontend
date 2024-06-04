@@ -36,7 +36,7 @@ const Login = () => {
   }
 
   return (
-    <>
+    <div className={styles.login}>
       <Paper className={styles.paper}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h2>Login</h2>
@@ -79,7 +79,7 @@ const Login = () => {
       <Link to="/register">
         <Button variant="contained">Registration</Button>
       </Link>
-    </>
+    </div>
   );
 };
 

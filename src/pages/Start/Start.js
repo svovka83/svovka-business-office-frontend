@@ -2,7 +2,7 @@ import styles from "./Start.module.css";
 
 const Start = () => {
   return (
-    <div>
+    <div className={styles.start}>
       <h1>Welcome to site!</h1>
       <img
         className={styles.start_image}

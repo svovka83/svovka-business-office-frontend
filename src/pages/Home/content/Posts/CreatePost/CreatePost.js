@@ -37,8 +37,8 @@ const CreatePost = () => {
 
   return (
     <div>
-      <h2>Create Post</h2>
       <form className={styled.create_post}>
+      <h2>Create Post</h2>
         <h3>Title</h3>
         <TextField onChange={changeTitle} value={title} variant="standard" />
         <br />
@@ -59,14 +59,13 @@ const CreatePost = () => {
           color="success"
         >
           Create post
-        </Button>
-      </form>
-      <br />
+        </Button>{" "}
       <Link to="/home/posts">
         <Button variant="contained" color="inherit">
           Back
         </Button>
       </Link>
+      </form>
     </div>
   );
 };
