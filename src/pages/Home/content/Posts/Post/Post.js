@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
 import PostEdit from "./PostEdit/PostEdit";
+import PostComments from "./PostComments/PostComments";
 
 import axios from "../../../../../axios";
 
@@ -12,24 +13,11 @@ const Post = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const [post, setPost] = React.useState({});
+
   React.useEffect(() => {
     axios.get(`/posts/${id}`).then((res) => setPost(res.data));
   }, [id]);
-
-  const [post, setPost] = React.useState({});
-
-  const addLikes = async () => {
-    const fields = {
-      likes: post.likes + 1,
-      viewCount: post.viewCount - 1,
-    };
-    await axios.put(`/posts/${id}`, fields);
-    await axios.get(`/posts/${id}`).then((res) => setPost(res.data));
-  };
-
-  const updateScreen = () => {
-    axios.get(`/posts/${id}`).then((res) => setPost(res.data));
-  };
 
   const removePost = async () => {
     if (window.confirm("Do you really want to delete the post?")) {
@@ -61,10 +49,10 @@ const Post = () => {
         text={post.text}
         viewCount={post.viewCount}
         likes={post.likes}
-        addLikes={addLikes}
-        updateScreen={updateScreen}
+        setPost={setPost}
         removePost={removePost}
       />
+      <PostComments />
     </div>
   );
 };

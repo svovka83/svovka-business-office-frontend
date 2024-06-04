@@ -22,8 +22,6 @@ const PostEdit = (props) => {
     }
   }, [data._id, props.userId]);
 
-  console.log(data._id, props.userId, data._id === props.userId, disabled);
-
   const changeTitle = (event) => {
     setTitle(event.target.value);
   };
@@ -45,7 +43,16 @@ const PostEdit = (props) => {
     };
     await axios.put(`/posts/${props.id}`, fields);
     setIsEditable(false);
-    props.updateScreen();
+    axios.get(`/posts/${props.id}`).then((res) => props.setPost(res.data));
+  };
+
+  const addLikes = async () => {
+    const fields = {
+      likes: props.likes + 1,
+      viewCount: props.viewCount - 1,
+    };
+    await axios.put(`/posts/${props.id}`, fields);
+    await axios.get(`/posts/${props.id}`).then((res) => props.setPost(res.data));
   };
 
   return (
@@ -79,7 +86,7 @@ const PostEdit = (props) => {
         )}
       </p>
       <div className={styles.management}>
-        <span onClick={props.addLikes} className={styles.likes}>
+        <span onClick={addLikes} className={styles.likes}>
           likes: ❤️ {props.likes}
         </span>
         <div>
