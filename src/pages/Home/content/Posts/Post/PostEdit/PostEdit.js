@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+import Likes from "./Likes/Likes";
+
 import { selectorFullData } from "../../../../../../redux/slices/usersSlice";
 
 import axios from "../../../../../../axios";
@@ -48,17 +50,6 @@ const PostEdit = (props) => {
       .then((res) => props.setPost(res.data));
   };
 
-  const addLikes = async () => {
-    const fields = {
-      likes: props.likes + 1,
-      viewCount: props.viewCount - 1,
-    };
-    await axios.put(`/posts/${props.id}`, fields);
-    await axios
-      .get(`/posts/${props.id}`)
-      .then((res) => props.setPost(res.data));
-  };
-
   return (
     <div className={styles.post}>
       <div className={styles.title}>
@@ -101,8 +92,8 @@ const PostEdit = (props) => {
         </div>
       </div>
       <p>
-        <div  className={styles.text}>
-        {isEditable ? (
+        <div className={styles.text}>
+          {isEditable ? (
             <TextField
               onChange={changeText}
               value={text}
@@ -110,15 +101,20 @@ const PostEdit = (props) => {
               rows={4}
               fullWidth
             />
-            ) : (
-              <p>{props.text}</p>
-              )}
-              </div>
+          ) : (
+            <p>{props.text}</p>
+          )}
+        </div>
       </p>
       <div className={styles.management}>
-        <span onClick={addLikes} className={styles.likes}>
-          likes: ❤️ {props.likes}
-        </span>
+        <Likes
+          id={props.id}
+          userId={props.userId}
+          likeCount={props.likeCount}
+          isLike={props.isLike}
+          viewCount={props.viewCount}
+          setPost={props.setPost}
+        />
         <span>views: 👁️‍🗨️ {props.viewCount}</span>
       </div>
     </div>

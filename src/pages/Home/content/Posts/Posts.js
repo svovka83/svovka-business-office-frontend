@@ -44,7 +44,7 @@ const Posts = () => {
             <b>views: 👁️‍🗨️ {post.viewCount}</b>
           </span>
           <span>
-            <b>likes: ❤️ {post.likes}</b>
+            <b>likes: ❤️ {post.likeCount}</b>
           </span>
           <div>
             <Link to={`/home/posts/${post._id}`}>

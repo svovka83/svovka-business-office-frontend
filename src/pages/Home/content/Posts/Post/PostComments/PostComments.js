@@ -5,7 +5,7 @@ import axios from "../../../../../../axios";
 import styles from "./PostComments.module.css";
 import { Button, TextField } from "@mui/material";
 
-export const PostComments = () => {
+export const PostComments = (props) => {
   const [text, setText] = React.useState("");
   const [comments, setComments] = React.useState([]);
 
@@ -18,7 +18,11 @@ export const PostComments = () => {
   };
 
   const createComment = async () => {
-    await axios.post("/comments", { comment: text });
+    const fields = {
+      comment: text,
+      postId: props.id,
+    };
+    await axios.post("/comments", fields);
     setText("");
     await axios.get("/comments").then((res) => setComments(res.data));
   };
@@ -36,12 +40,15 @@ export const PostComments = () => {
         </div>
       </form>
       <div>
-        {comments.map((c) => (
-          <div key={c._id} className={styles.comments}>
-            <h4>{c.userName}</h4>
-            <p>{c.comment}</p>
-          </div>
-        ))}
+        {comments
+          .filter((f) => f.postId === props.id)
+          .toReversed()
+          .map((c) => (
+            <div key={c._id} className={styles.comments}>
+              <h4>{c.userName}</h4>
+              <p>{c.comment}</p>
+            </div>
+          ))}
       </div>
     </div>
   );

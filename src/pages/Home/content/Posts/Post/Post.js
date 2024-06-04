@@ -47,12 +47,13 @@ const Post = () => {
         userName={post.userName}
         title={post.title}
         text={post.text}
+        likeCount={post.likeCount}
+        isLike={post.isLike}
         viewCount={post.viewCount}
-        likes={post.likes}
         setPost={setPost}
         removePost={removePost}
       />
-      <PostComments />
+      <PostComments id={id} />
     </div>
   );
 };
