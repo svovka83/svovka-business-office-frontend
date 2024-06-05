@@ -109,11 +109,11 @@ const PostEdit = (props) => {
       <div className={styles.management}>
         <Likes
           id={props.id}
-          userId={props.userId}
           likeCount={props.likeCount}
-          isLike={props.isLike}
+          userLikes={props.userLikes}
           viewCount={props.viewCount}
           setPost={props.setPost}
+          a={props.a}
         />
         <span>views: 👁️‍🗨️ {props.viewCount}</span>
       </div>

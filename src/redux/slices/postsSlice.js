@@ -19,6 +19,7 @@ const postsSlice = createSlice({
   reducers: {},
   selectors: {
     selectorAllPosts: (state) => state.posts,
+    selectorUserLikes: (state) => state.post.userLikes,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchGetAllPosts.pending, (state) => {

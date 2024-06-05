@@ -48,7 +48,7 @@ const Post = () => {
         title={post.title}
         text={post.text}
         likeCount={post.likeCount}
-        isLike={post.isLike}
+        userLikes={post.userLikes}
         viewCount={post.viewCount}
         setPost={setPost}
         removePost={removePost}
