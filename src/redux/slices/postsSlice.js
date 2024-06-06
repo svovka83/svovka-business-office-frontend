@@ -9,17 +9,30 @@ export const fetchGetAllPosts = createAsyncThunk(
   }
 );
 
+export const fetchGetOnePost = createAsyncThunk(
+  "posts/fetchGetOnePost",
+  async (id) => {
+    const { data } = await axios.get(`/posts/${id}`);
+    return data;
+  }
+);
+
 const initialState = {
   posts: [],
+  post: {},
 };
 
 const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
+  reducers: {
+    reducerClearPost: (state) => {
+      state.post = {};
+    },
+  },
   selectors: {
     selectorAllPosts: (state) => state.posts,
-    selectorUserLikes: (state) => state.post.userLikes,
+    selectorOnePost: (state) => state.post,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchGetAllPosts.pending, (state) => {
@@ -31,9 +44,20 @@ const postsSlice = createSlice({
     builder.addCase(fetchGetAllPosts.rejected, (state) => {
       state.posts = [];
     });
+
+    builder.addCase(fetchGetOnePost.pending, (state) => {
+      state.post = {};
+    });
+    builder.addCase(fetchGetOnePost.fulfilled, (state, action) => {
+      state.post = action.payload;
+    });
+    builder.addCase(fetchGetOnePost.rejected, (state) => {
+      state.post = {};
+    });
   },
 });
 
-export const { selectorAllPosts } = postsSlice.selectors;
+export const { selectorAllPosts, selectorOnePost } = postsSlice.selectors;
+export const { reducerClearPost } = postsSlice.actions;
 
 export const postsReducer = postsSlice.reducer;

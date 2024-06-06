@@ -1,17 +1,29 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import axios from "../../../../../../axios";
 
 import styles from "./PostComments.module.css";
 import { Button, TextField } from "@mui/material";
 
+import { selectorFullData } from "../../../../../../redux/slices/usersSlice";
+import {
+  fetchGetAllComments,
+  selectorAllComments,
+} from "../../../../../../redux/slices/commentsSlice";
+import { selectorOnePost } from "../../../../../../redux/slices/postsSlice";
+
 export const PostComments = (props) => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectorFullData);
+  const post = useSelector(selectorOnePost);
+  const comments = useSelector(selectorAllComments);
+
   const [text, setText] = React.useState("");
-  const [comments, setComments] = React.useState([]);
 
   React.useEffect(() => {
-    axios.get("/comments").then((res) => setComments(res.data));
-  }, []);
+    dispatch(fetchGetAllComments());
+  }, [dispatch]);
 
   const changeComment = (event) => {
     setText(event.target.value);
@@ -24,7 +36,7 @@ export const PostComments = (props) => {
     };
     await axios.post("/comments", fields);
     setText("");
-    await axios.get("/comments").then((res) => setComments(res.data));
+    dispatch(fetchGetAllComments());
   };
 
   return (
@@ -45,7 +57,22 @@ export const PostComments = (props) => {
           .toReversed()
           .map((c) => (
             <div key={c._id} className={styles.comments}>
-              <h4>{c.userName}</h4>
+              <div className={styles.comments_header}>
+                <h4>{c.userName}</h4>
+                <Button
+                  disabled={user._id !== post.userId && user._id !== c.userId}
+                  onClick={async () => {
+                    if (window.confirm("Do you want delete comment?")) {
+                      await axios.delete(`/comments/${c._id}`);
+                      dispatch(fetchGetAllComments());
+                    }
+                  }}
+                  variant="contained"
+                  color="error"
+                >
+                  Delete
+                </Button>
+              </div>
               <p>{c.comment}</p>
             </div>
           ))}

@@ -1,26 +1,25 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Likes from "./Likes/Likes";
-
-import { selectorFullData } from "../../../../../../redux/slices/usersSlice";
 
 import axios from "../../../../../../axios";
 
 import styles from "./PostEdit.module.css";
 import { Button, TextField } from "@mui/material";
 
-const PostEdit = (props) => {
-  const data = useSelector(selectorFullData);
+import { selectorFullData } from "../../../../../../redux/slices/usersSlice";
+import {
+  fetchGetOnePost,
+  selectorOnePost,
+} from "../../../../../../redux/slices/postsSlice";
 
-  React.useEffect(() => {
-    if (data._id === props.userId) {
-      setDisabled(false);
-    }
-  }, [data._id, props.userId]);
+const PostEdit = (props) => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectorFullData);
+  const post = useSelector(selectorOnePost);
 
   const [isEditable, setIsEditable] = React.useState(false);
-  const [disabled, setDisabled] = React.useState(true);
   const [title, setTitle] = React.useState();
   const [text, setText] = React.useState();
 
@@ -32,8 +31,8 @@ const PostEdit = (props) => {
   };
 
   const forEdit = () => {
-    setTitle(props.title);
-    setText(props.text);
+    setTitle(post.title);
+    setText(post.text);
     setIsEditable(true);
   };
 
@@ -41,19 +40,17 @@ const PostEdit = (props) => {
     const fields = {
       title,
       text,
-      viewCount: props.viewCount - 1,
+      viewCount: post.viewCount - 1,
     };
     await axios.put(`/posts/${props.id}`, fields);
     setIsEditable(false);
-    await axios
-      .get(`/posts/${props.id}`)
-      .then((res) => props.setPost(res.data));
+    dispatch(fetchGetOnePost(props.id));
   };
 
   return (
     <div className={styles.post}>
       <div className={styles.title}>
-        <span>author: {props.userName}</span>
+        <span>author: {post.userName}</span>
         <h3>
           {isEditable ? (
             <TextField
@@ -62,7 +59,7 @@ const PostEdit = (props) => {
               variant="standard"
             />
           ) : (
-            props.title
+            post.title
           )}
         </h3>
         <div>
@@ -76,7 +73,7 @@ const PostEdit = (props) => {
               onClick={forEdit}
               variant="contained"
               color="warning"
-              disabled={disabled}
+              disabled={user._id !== post.userId}
             >
               Edit
             </Button>
@@ -85,7 +82,7 @@ const PostEdit = (props) => {
             onClick={props.removePost}
             variant="contained"
             color="error"
-            disabled={disabled}
+            disabled={user._id !== post.userId}
           >
             Delete
           </Button>
@@ -102,20 +99,15 @@ const PostEdit = (props) => {
               fullWidth
             />
           ) : (
-            <p>{props.text}</p>
+            <p>{post.text}</p>
           )}
         </div>
       </p>
       <div className={styles.management}>
         <Likes
           id={props.id}
-          likeCount={props.likeCount}
-          userLikes={props.userLikes}
-          viewCount={props.viewCount}
-          setPost={props.setPost}
-          a={props.a}
         />
-        <span>views: 👁️‍🗨️ {props.viewCount}</span>
+        <span>views: 👁️‍🗨️ {post.viewCount}</span>
       </div>
     </div>
   );

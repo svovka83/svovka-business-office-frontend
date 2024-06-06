@@ -1,49 +1,49 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import axios from "../../../../../../../axios";
 
-import { selectorFullData } from "../../../../../../../redux/slices/usersSlice";
-
 import styles from "./Likes.module.css";
 
+import { selectorFullData } from "../../../../../../../redux/slices/usersSlice";
+import {
+  fetchGetOnePost,
+  selectorOnePost,
+} from "../../../../../../../redux/slices/postsSlice";
+
 export const Likes = (props) => {
+  const dispatch = useDispatch();
   const data = useSelector(selectorFullData);
+  const post = useSelector(selectorOnePost);
 
   const [isLike, setIsLike] = React.useState(false);
 
   React.useEffect(() => {
-    if (props.userLikes) {
-      if (props.userLikes.includes(data._id)) {
+    if (post.userLikes) {
+      if (post.userLikes.includes(data._id)) {
         setIsLike(true);
       }
     }
-  }, [data._id, props.userLikes]);
-
-  console.log(props.userLikes, data._id, isLike);
+  }, [data._id, post.userLikes]);
 
   const addLike = async () => {
     const fields = {
-      likeCount: props.likeCount + 1,
-      userLikes: [...props.userLikes, data._id],
-      viewCount: props.viewCount - 1,
+      likeCount: post.likeCount + 1,
+      userLikes: [...post.userLikes, data._id],
+      viewCount: post.viewCount - 1,
     };
     await axios.put(`/posts/${props.id}`, fields);
-    await axios
-      .get(`/posts/${props.id}`)
-      .then((res) => props.setPost(res.data));
+    dispatch(fetchGetOnePost(props.id));
     setIsLike(true);
   };
   const removeLike = async () => {
     const fields = {
-      likeCount: props.likeCount - 1,
-      userLikes: props.userLikes.filter((l) => l !== data._id),
-      viewCount: props.viewCount - 1,
+      likeCount: post.likeCount - 1,
+      userLikes: post.userLikes.filter((l) => l !== data._id),
+      viewCount: post.viewCount - 1,
     };
     await axios.put(`/posts/${props.id}`, fields);
-    await axios
-      .get(`/posts/${props.id}`)
-      .then((res) => props.setPost(res.data));
+    dispatch(fetchGetOnePost(props.id));
     setIsLike(false);
   };
 
@@ -55,11 +55,11 @@ export const Likes = (props) => {
           title="I don`t like it!"
           className={styles.likes}
         >
-          likes: ❤️ {props.likeCount}
+          likes: ❤️ {post.likeCount}
         </span>
       ) : (
         <span onClick={addLike} title="I like it!" className={styles.likes}>
-          likes: 🤍 {props.likeCount}
+          likes: 🤍 {post.likeCount}
         </span>
       )}
     </>

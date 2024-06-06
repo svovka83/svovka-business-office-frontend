@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import PostEdit from "./PostEdit/PostEdit";
 import PostComments from "./PostComments/PostComments";
@@ -9,20 +10,27 @@ import axios from "../../../../../axios";
 import styles from "./Post.module.css";
 import { Button } from "@mui/material";
 
+import {
+  fetchGetOnePost,
+  reducerClearPost,
+} from "../../../../../redux/slices/postsSlice";
+import { fetchGetAllComments } from "../../../../../redux/slices/commentsSlice";
+
 const Post = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [post, setPost] = React.useState({});
-
   React.useEffect(() => {
-    axios.get(`/posts/${id}`).then((res) => setPost(res.data));
-  }, [id]);
+    dispatch(fetchGetOnePost(id));
+  }, [dispatch, id]);
 
   const removePost = async () => {
     if (window.confirm("Do you really want to delete the post?")) {
       await axios.delete(`/posts/${id}`);
       navigate("/home/posts");
+      dispatch(fetchGetAllComments());
+      dispatch(reducerClearPost());
     }
   };
 
@@ -41,18 +49,7 @@ const Post = () => {
           </Button>
         </Link>
       </div>
-      <PostEdit
-        id={id}
-        userId={post.userId}
-        userName={post.userName}
-        title={post.title}
-        text={post.text}
-        likeCount={post.likeCount}
-        userLikes={post.userLikes}
-        viewCount={post.viewCount}
-        setPost={setPost}
-        removePost={removePost}
-      />
+      <PostEdit id={id} removePost={removePost} />
       <PostComments id={id} />
     </div>
   );
