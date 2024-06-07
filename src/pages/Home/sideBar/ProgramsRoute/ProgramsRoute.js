@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-import styles from "./Programs.module.css";
+import styles from "./ProgramsRoute.module.css";
 import { Button } from "@mui/material";
 
-const Programs = () => {
+const ProgramsRoute = () => {
   return (
     <div className={styles.side_bar}>
       <Link to="/home/programs/calculator">
@@ -33,4 +33,4 @@ const Programs = () => {
   );
 };
 
-export default Programs;
+export default ProgramsRoute;

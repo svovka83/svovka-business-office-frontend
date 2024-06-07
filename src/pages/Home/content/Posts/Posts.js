@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./Posts.module.css";
 import { Button } from "@mui/material";
+import Paper from "@mui/material/Paper";
 
 import {
   fetchGetAllPosts,
@@ -35,24 +36,15 @@ const Posts = () => {
         </Link>
       </div>
       {posts.map((post) => (
-        <div key={post._id} className={styles.posts}>
-          <h4>{post.title}</h4>
-          <span>
-            <b>author: {post.userName}</b>
-          </span>
-          <span>
-            <b>views: 👁️‍🗨️ {post.viewCount}</b>
-          </span>
-          <span>
-            <b>likes: ❤️ {post.likeCount}</b>
-          </span>
-          <div>
-            <Link to={`/home/posts/${post._id}`}>
-              <Button variant="contained" color="info">
-                read
-              </Button>
-            </Link>
-          </div>
+        <div key={post._id}>
+          <Link to={`/home/posts/${post._id}`} className={styles.link}>
+            <Paper className={styles.paper} elevation={5}>
+              <b>author: {post.userName}</b>
+              <b>title: {post.title}</b>
+              <b>likes: ❤️ {post.likeCount}</b>
+              <b>views: 👁️‍🗨️ {post.viewCount}</b>
+            </Paper>
+          </Link>
         </div>
       ))}
     </div>

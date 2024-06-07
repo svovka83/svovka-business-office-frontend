@@ -22,8 +22,26 @@ export const fetchGetMe = createAsyncThunk("user/fetchGetMe", async () => {
   return data;
 });
 
+export const fetchGetAllUsers = createAsyncThunk(
+  "user/fetchGetAllUsers",
+  async () => {
+    const { data } = await axios.get("/users");
+    return data;
+  }
+);
+
+export const fetchGetOneUser = createAsyncThunk(
+  "user/fetchGetOneUser",
+  async (id) => {
+    const { data } = await axios.get(`/users/${id}`);
+    return data;
+  }
+);
+
 const initialState = {
-  data: null,
+  me: null,
+  users: [],
+  user: {},
 };
 
 const userSlice = createSlice({
@@ -31,46 +49,69 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logOut: (state) => {
-      state.data = null;
+      state.me = null;
     },
   },
   selectors: {
-    selectorFullData: (state) => state.data,
+    selectorFullData: (state) => state.me,
+    selectorAllUsers: (state) => state.users,
+    selectorOneUser: (state) => state.user,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchRegister.pending, (state) => {
-      state.data = null;
+      state.me = null;
     });
     builder.addCase(fetchRegister.fulfilled, (state, action) => {
-      state.data = action.payload;
+      state.me = action.payload;
     });
     builder.addCase(fetchRegister.rejected, (state) => {
-      state.data = null;
+      state.me = null;
     });
 
     builder.addCase(fetchLogin.pending, (state) => {
-      state.data = null;
+      state.me = null;
     });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
-      state.data = action.payload;
+      state.me = action.payload;
     });
     builder.addCase(fetchLogin.rejected, (state) => {
-      state.data = null;
+      state.me = null;
     });
 
     builder.addCase(fetchGetMe.pending, (state) => {
-      state.data = null;
+      state.me = null;
     });
     builder.addCase(fetchGetMe.fulfilled, (state, action) => {
-      state.data = action.payload;
+      state.me = action.payload;
     });
     builder.addCase(fetchGetMe.rejected, (state) => {
-      state.data = null;
+      state.me = null;
+    });
+
+    builder.addCase(fetchGetAllUsers.pending, (state) => {
+      state.users = [];
+    });
+    builder.addCase(fetchGetAllUsers.fulfilled, (state, action) => {
+      state.users = action.payload;
+    });
+    builder.addCase(fetchGetAllUsers.rejected, (state) => {
+      state.users = [];
+    });
+
+    builder.addCase(fetchGetOneUser.pending, (state) => {
+      state.user = {};
+    });
+    builder.addCase(fetchGetOneUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
+    builder.addCase(fetchGetOneUser.rejected, (state) => {
+      state.user = {};
     });
   },
 });
 
-export const { selectorFullData } = userSlice.selectors;
+export const { selectorFullData, selectorAllUsers, selectorOneUser } =
+  userSlice.selectors;
 export const { logOut } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
