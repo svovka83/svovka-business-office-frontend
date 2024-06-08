@@ -38,6 +38,14 @@ export const fetchGetOneUser = createAsyncThunk(
   }
 );
 
+export const fetchAddFriend = createAsyncThunk(
+  "user/fetchAddFriend",
+  async (id) => {
+    const { data } = await axios.patch(`/users/friends/${id}`);
+    return data;
+  }
+);
+
 const initialState = {
   me: null,
   users: [],
@@ -106,6 +114,16 @@ const userSlice = createSlice({
     });
     builder.addCase(fetchGetOneUser.rejected, (state) => {
       state.user = {};
+    });
+
+    builder.addCase(fetchAddFriend.pending, (state) => {
+      state.me = null;
+    });
+    builder.addCase(fetchAddFriend.fulfilled, (state, action) => {
+      state.me = action.payload;
+    });
+    builder.addCase(fetchAddFriend.rejected, (state) => {
+      state.me = null;
     });
   },
 });
