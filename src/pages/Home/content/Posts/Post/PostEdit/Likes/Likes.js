@@ -13,43 +13,31 @@ import {
 
 export const Likes = (props) => {
   const dispatch = useDispatch();
-  const data = useSelector(selectorFullData);
+  const me = useSelector(selectorFullData);
   const post = useSelector(selectorOnePost);
-
-  const [isLike, setIsLike] = React.useState(false);
-
-  React.useEffect(() => {
-    if (post.userLikes) {
-      if (post.userLikes.includes(data._id)) {
-        setIsLike(true);
-      }
-    }
-  }, [data._id, post.userLikes]);
 
   const addLike = async () => {
     const fields = {
       likeCount: post.likeCount + 1,
-      userLikes: [...post.userLikes, data._id],
+      userLikes: [...post.userLikes, me._id],
       viewCount: post.viewCount - 1,
     };
     await axios.put(`/posts/${props.id}`, fields);
     dispatch(fetchGetOnePost(props.id));
-    setIsLike(true);
   };
   const removeLike = async () => {
     const fields = {
       likeCount: post.likeCount - 1,
-      userLikes: post.userLikes.filter((l) => l !== data._id),
+      userLikes: post.userLikes.filter((l) => l !== me._id),
       viewCount: post.viewCount - 1,
     };
     await axios.put(`/posts/${props.id}`, fields);
     dispatch(fetchGetOnePost(props.id));
-    setIsLike(false);
   };
 
   return (
     <>
-      {isLike ? (
+      {(post.userLikes.includes(me._id)) ? (
         <span
           onClick={removeLike}
           title="I don`t like it!"

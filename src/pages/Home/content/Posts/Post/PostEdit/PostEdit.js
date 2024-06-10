@@ -104,9 +104,7 @@ const PostEdit = (props) => {
         </div>
       </p>
       <div className={styles.management}>
-        <Likes
-          id={props.id}
-        />
+        <Likes id={props.id} />
         <span>views: 👁️‍🗨️ {post.viewCount}</span>
       </div>
     </div>

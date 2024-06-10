@@ -41,7 +41,15 @@ export const fetchGetOneUser = createAsyncThunk(
 export const fetchAddFriend = createAsyncThunk(
   "user/fetchAddFriend",
   async (id) => {
-    const { data } = await axios.patch(`/users/friends/${id}`);
+    const { data } = await axios.put(`/users/add_friend/${id}`);
+    return data;
+  }
+);
+
+export const fetchRemoveFriend = createAsyncThunk(
+  "user/fetchRemoveFriend",
+  async (id) => {
+    const { data } = await axios.put(`/users/remove_friend/${id}`);
     return data;
   }
 );
@@ -50,6 +58,7 @@ const initialState = {
   me: null,
   users: [],
   user: {},
+  status: "loading",
 };
 
 const userSlice = createSlice({
@@ -62,8 +71,10 @@ const userSlice = createSlice({
   },
   selectors: {
     selectorFullData: (state) => state.me,
+    selectorMyFriends: (state) => state.me.friends,
     selectorAllUsers: (state) => state.users,
     selectorOneUser: (state) => state.user,
+    selectorStatus: (state) => state.status,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchRegister.pending, (state) => {
@@ -88,15 +99,17 @@ const userSlice = createSlice({
 
     builder.addCase(fetchGetMe.pending, (state) => {
       state.me = null;
+      state.status = "loading";
     });
     builder.addCase(fetchGetMe.fulfilled, (state, action) => {
       state.me = action.payload;
+      state.status = "loaded";
     });
     builder.addCase(fetchGetMe.rejected, (state) => {
       state.me = null;
     });
 
-    builder.addCase(fetchGetAllUsers.pending, (state) => {
+    builder.addCase(fetchGetAllUsers.pending, (state, action) => {
       state.users = [];
     });
     builder.addCase(fetchGetAllUsers.fulfilled, (state, action) => {
@@ -117,19 +130,36 @@ const userSlice = createSlice({
     });
 
     builder.addCase(fetchAddFriend.pending, (state) => {
-      state.me = null;
+      state.status = "loading";
     });
     builder.addCase(fetchAddFriend.fulfilled, (state, action) => {
       state.me = action.payload;
+      state.status = "loaded";
     });
     builder.addCase(fetchAddFriend.rejected, (state) => {
+      state.me = null;
+    });
+
+    builder.addCase(fetchRemoveFriend.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(fetchRemoveFriend.fulfilled, (state, action) => {
+      state.me = action.payload;
+      state.status = "loaded";
+    });
+    builder.addCase(fetchRemoveFriend.rejected, (state) => {
       state.me = null;
     });
   },
 });
 
-export const { selectorFullData, selectorAllUsers, selectorOneUser } =
-  userSlice.selectors;
+export const {
+  selectorFullData,
+  selectorMyFriends,
+  selectorAllUsers,
+  selectorOneUser,
+  selectorStatus,
+} = userSlice.selectors;
 export const { logOut } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

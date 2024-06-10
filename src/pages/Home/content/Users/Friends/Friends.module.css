@@ -8,10 +8,18 @@
   padding: 20px 0;
 }
 
+.users {
+  display: inline-flex;
+}
+
 .paper {
   text-align: center;
   width: 300px;
-  margin: 20px auto;
+  margin: 20px;
   padding-top: 10px;
-  padding-bottom: 25px;
+  cursor: pointer;
+}
+
+.paper:hover {
+  transform: scale(1.03);
 }

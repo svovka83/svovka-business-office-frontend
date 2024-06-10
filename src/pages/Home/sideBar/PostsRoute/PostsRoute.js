@@ -1,28 +1,21 @@
 import { Link } from "react-router-dom";
 
-import styles from "./UsersRoute.module.css";
+import styles from "./PostsRoute.module.css";
 import { Button } from "@mui/material";
 
-const UsersRoute = () => {
+const PostsRoute = () => {
   return (
     <div className={styles.side_bar}>
-      <Link to="/home/users">
+      <Link to="/home/posts">
         <Button variant="contained" color="info" className={styles.button_size}>
-          Users
+          Posts
         </Button>
       </Link>
       <br />
       <br />
-      <Link to="/home/users/friends">
+      <Link to="/home/posts/create_post">
         <Button variant="contained" color="info" className={styles.button_size}>
-          Friends
-        </Button>
-      </Link>
-      <br />
-      <br />
-      <Link to="/home/users/profile">
-        <Button variant="contained" color="info" className={styles.button_size}>
-          Profile
+          Create
         </Button>
       </Link>
       <br />
@@ -40,4 +33,4 @@ const UsersRoute = () => {
   );
 };
 
-export default UsersRoute;
+export default PostsRoute;

@@ -33,7 +33,7 @@ const Registration = () => {
   if (isAuth) {
     const { token } = data;
     window.localStorage.setItem("token", token);
-    return <Navigate to="/home" />;
+    return <Navigate to="/" />;
   }
 
   return (

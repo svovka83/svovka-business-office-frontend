@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import axios from "../../../../../axios";
 
-import styled from "./CreatePost.module.css"
+import styled from "./CreatePost.module.css";
 import { Button, TextField } from "@mui/material";
 
 const CreatePost = () => {
@@ -38,7 +38,7 @@ const CreatePost = () => {
   return (
     <div>
       <form className={styled.create_post}>
-      <h2>Create Post</h2>
+        <h2>Create Post</h2>
         <h3>Title</h3>
         <TextField onChange={changeTitle} value={title} variant="standard" />
         <br />
@@ -60,11 +60,11 @@ const CreatePost = () => {
         >
           Create post
         </Button>{" "}
-      <Link to="/home/posts">
-        <Button variant="contained" color="inherit">
-          Back
-        </Button>
-      </Link>
+        <Link to="/home/posts">
+          <Button variant="contained" color="inherit">
+            Back
+          </Button>
+        </Link>
       </form>
     </div>
   );

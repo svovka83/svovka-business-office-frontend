@@ -23,11 +23,6 @@ const Posts = () => {
   return (
     <div>
       <div className={styles.header_posts}>
-        <Link to="/home/create_post">
-          <Button variant="contained" color="info">
-            Create
-          </Button>
-        </Link>
         <h2>Posts</h2>
         <Link to="/home">
           <Button variant="contained" color="inherit">

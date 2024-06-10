@@ -14,8 +14,8 @@ import {
 
 const AllUsers = () => {
   const dispatch = useDispatch();
-  const me = useSelector(selectorFullData);
   const users = useSelector(selectorAllUsers);
+  const me = useSelector(selectorFullData);
 
   React.useEffect(() => {
     dispatch(fetchGetAllUsers());
@@ -39,6 +39,11 @@ const AllUsers = () => {
               <Paper className={styles.paper} elevation={5}>
                 <h4>{users.fullName}</h4>
                 <p>{users.email}</p>
+                <p>
+                  {me.friends.includes(users._id)
+                    ? "my friend"
+                    : "not my friend"}
+                </p>
               </Paper>
             </div>
           </Link>

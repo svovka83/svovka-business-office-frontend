@@ -20,6 +20,7 @@ export const fetchGetOnePost = createAsyncThunk(
 const initialState = {
   posts: [],
   post: {},
+  status: "loading",
 };
 
 const postsSlice = createSlice({
@@ -33,6 +34,7 @@ const postsSlice = createSlice({
   selectors: {
     selectorAllPosts: (state) => state.posts,
     selectorOnePost: (state) => state.post,
+    selectorStatusPost: (state) => state.status,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchGetAllPosts.pending, (state) => {
@@ -47,9 +49,11 @@ const postsSlice = createSlice({
 
     builder.addCase(fetchGetOnePost.pending, (state) => {
       state.post = {};
+      state.status = "loading";
     });
     builder.addCase(fetchGetOnePost.fulfilled, (state, action) => {
       state.post = action.payload;
+      state.status = "loaded";
     });
     builder.addCase(fetchGetOnePost.rejected, (state) => {
       state.post = {};
@@ -57,7 +61,8 @@ const postsSlice = createSlice({
   },
 });
 
-export const { selectorAllPosts, selectorOnePost } = postsSlice.selectors;
+export const { selectorAllPosts, selectorOnePost, selectorStatusPost } =
+  postsSlice.selectors;
 export const { reducerClearPost } = postsSlice.actions;
 
 export const postsReducer = postsSlice.reducer;
