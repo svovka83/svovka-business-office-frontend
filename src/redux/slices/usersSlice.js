@@ -22,6 +22,14 @@ export const fetchGetMe = createAsyncThunk("user/fetchGetMe", async () => {
   return data;
 });
 
+export const fetchUpdateMe = createAsyncThunk(
+  "user/fetchUpdateMe",
+  async (fields) => {
+    const { data } = await axios.put("/me", fields);
+    return data;
+  }
+);
+
 export const fetchGetAllUsers = createAsyncThunk(
   "user/fetchGetAllUsers",
   async () => {
@@ -68,6 +76,21 @@ const userSlice = createSlice({
     logOut: (state) => {
       state.me = null;
     },
+    changeAge: (state, action) => {
+      state.me.age = action.payload;
+    },
+    changeGender: (state, action) => {
+      state.me.gender = action.payload;
+    },
+    changeStatus: (state, action) => {
+      state.me.status = action.payload;
+    },
+    changeCountry: (state, action) => {
+      state.me.country = action.payload;
+    },
+    changeJob: (state, action) => {
+      state.me.job = action.payload;
+    },
   },
   selectors: {
     selectorFullData: (state) => state.me,
@@ -106,6 +129,18 @@ const userSlice = createSlice({
       state.status = "loaded";
     });
     builder.addCase(fetchGetMe.rejected, (state) => {
+      state.me = null;
+    });
+
+    builder.addCase(fetchUpdateMe.pending, (state) => {
+      state.me = null;
+      state.status = "loading";
+    });
+    builder.addCase(fetchUpdateMe.fulfilled, (state, action) => {
+      state.me = action.payload;
+      state.status = "loaded";
+    });
+    builder.addCase(fetchUpdateMe.rejected, (state) => {
       state.me = null;
     });
 
@@ -160,6 +195,13 @@ export const {
   selectorOneUser,
   selectorStatus,
 } = userSlice.selectors;
-export const { logOut } = userSlice.actions;
+export const {
+  logOut,
+  changeAge,
+  changeGender,
+  changeStatus,
+  changeCountry,
+  changeJob,
+} = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

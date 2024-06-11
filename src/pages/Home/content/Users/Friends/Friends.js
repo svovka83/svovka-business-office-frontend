@@ -18,7 +18,7 @@ const Friends = () => {
 
   React.useEffect(() => {
     dispatch(fetchGetAllUsers());
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <div className={styles.content}>
@@ -38,7 +38,12 @@ const Friends = () => {
               <div className={styles.users}>
                 <Paper className={styles.paper} elevation={5}>
                   <h4>{users.fullName}</h4>
-                  <p>{users.email}</p>
+                  <p>Age: {users.age}</p>
+                  <p>Gender: {users.gender}</p>
+                  <p>Status: {users.status}</p>
+                  <p>Country: {users.country}</p>
+                  <p>Job: {users.job}</p>
+                  <p>Email: {users.email}</p>
                 </Paper>
               </div>
             </Link>
