@@ -23,7 +23,6 @@ const Friends = () => {
 
   const updateFriends = () => {
     dispatch(fetchGetMe());
-    dispatch(fetchGetAllUsers());
   };
 
   return (

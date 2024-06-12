@@ -27,7 +27,7 @@ const MyProfile = () => {
   const dispatch = useDispatch();
   const me = useSelector(selectorFullData);
 
-  const [disabled, setDisabled] = React.useState(true);
+  const [isEdit, setIsEdit] = React.useState(true);
 
   const changeAgeHandler = (e) => dispatch(changeAge(e.target.value));
   const changeGenderHandler = (e) =>
@@ -39,7 +39,7 @@ const MyProfile = () => {
   const changeJobHandler = (e) => dispatch(changeJob(e.target.value));
 
   const editMe = () => {
-    setDisabled(false);
+    setIsEdit(false);
   };
 
   const updateMe = () => {
@@ -52,8 +52,12 @@ const MyProfile = () => {
         job: me.job,
       };
       dispatch(fetchUpdateMe(fields));
-      setDisabled(true);
+      setIsEdit(true);
     }
+  };
+
+  const back = () => {
+    setIsEdit(true);
   };
 
   return (
@@ -73,88 +77,91 @@ const MyProfile = () => {
               <tr>
                 <th>Name:</th>
                 <td>{me.fullName}</td>
-                <td>{me.fullName}</td>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th>Age:</th>
-                <td>{me.age}</td>
                 <td>
-                  <TextField
-                    onChange={changeAgeHandler}
-                    value={me.age}
-                    disabled={disabled}
-                  />
+                  {isEdit ? (
+                    me.age
+                  ) : (
+                    <TextField onChange={changeAgeHandler} value={me.age} />
+                  )}
                 </td>
               </tr>
               <tr>
                 <th>Gender:</th>
-                <td>{me.gender}</td>
                 <td>
-                  <RadioGroup>
-                    <FormControlLabel
-                      onChange={changeGenderHandler}
-                      value="female"
-                      control={<Radio />}
-                      label="Female"
-                      disabled={disabled}
-                    />
-                    <FormControlLabel
-                      onChange={changeGenderHandler}
-                      value="male"
-                      control={<Radio />}
-                      label="Male"
-                      disabled={disabled}
-                    />
-                    <FormControlLabel
-                      onChange={changeGenderHandler}
-                      value="other"
-                      control={<Radio />}
-                      label="Other"
-                      disabled={disabled}
-                    />
-                  </RadioGroup>
+                  {isEdit ? (
+                    me.gender
+                  ) : (
+                    <RadioGroup>
+                      <FormControlLabel
+                        onChange={changeGenderHandler}
+                        value="female"
+                        control={<Radio />}
+                        label="Female"
+                      />
+                      <FormControlLabel
+                        onChange={changeGenderHandler}
+                        value="male"
+                        control={<Radio />}
+                        label="Male"
+                      />
+                      <FormControlLabel
+                        onChange={changeGenderHandler}
+                        value="other"
+                        control={<Radio />}
+                        label="Other"
+                      />
+                    </RadioGroup>
+                  )}
                 </td>
               </tr>
               <tr>
                 <th>Status:</th>
-                <td>{me.status}</td>
                 <td>
-                  <TextField
-                    onChange={changeStatusHandler}
-                    value={me.status}
-                    disabled={disabled}
-                  />
+                  {isEdit ? (
+                    me.status
+                  ) : (
+                    <TextField
+                      onChange={changeStatusHandler}
+                      value={me.status}
+                    />
+                  )}
                 </td>
               </tr>
               <tr>
                 <th>Country:</th>
-                <td>{me.country}</td>
                 <td>
-                  <Select onChange={changeCountryHandler} value={me.country} disabled={disabled}>
-                    <MenuItem value="Ukraine">Ukraine</MenuItem>
-                    <MenuItem value="USA">USA</MenuItem>
-                    <MenuItem value="France">France</MenuItem>
-                    <MenuItem value="Italy">Italy</MenuItem>
-                    <MenuItem value="Germany">Germany</MenuItem>
-                    <MenuItem value="Brazil">Brazil</MenuItem>
-                    <MenuItem value="Spain">Spain</MenuItem>
-                    <MenuItem value="Australia">Australia</MenuItem>
-                    <MenuItem value="Japan">Japan</MenuItem>
-                    <MenuItem value="Argentina">Argentina</MenuItem>
-                  </Select>
+                  {isEdit ? (
+                    me.country
+                  ) : (
+                    <Select onChange={changeCountryHandler} value={me.country}>
+                      <MenuItem value="Ukraine">Ukraine</MenuItem>
+                      <MenuItem value="USA">USA</MenuItem>
+                      <MenuItem value="Great Britain">Great Britain</MenuItem>
+                      <MenuItem value="France">France</MenuItem>
+                      <MenuItem value="Italy">Italy</MenuItem>
+                      <MenuItem value="Germany">Germany</MenuItem>
+                      <MenuItem value="Brazil">Brazil</MenuItem>
+                      <MenuItem value="Spain">Spain</MenuItem>
+                      <MenuItem value="Australia">Australia</MenuItem>
+                      <MenuItem value="Japan">Japan</MenuItem>
+                      <MenuItem value="Argentina">Argentina</MenuItem>
+                    </Select>
+                  )}
                 </td>
               </tr>
               <tr>
                 <th>Job:</th>
-                <td>{me.job}</td>
                 <td>
-                  <TextField
-                    onChange={changeJobHandler}
-                    value={me.job}
-                    disabled={disabled}
-                  />
+                  {isEdit ? (
+                    me.job
+                  ) : (
+                    <TextField onChange={changeJobHandler} value={me.job} />
+                  )}
                 </td>
               </tr>
             </tbody>
@@ -162,24 +169,32 @@ const MyProfile = () => {
               <tr>
                 <td></td>
                 <td>
-                  <Button
-                    disabled={!disabled}
-                    onClick={editMe}
-                    variant="contained"
-                    color="warning"
-                  >
-                    Edit
-                  </Button>
-                </td>
-                <td>
-                  <Button
-                    disabled={disabled}
-                    onClick={updateMe}
-                    variant="contained"
-                    color="success"
-                  >
-                    Send
-                  </Button>
+                  {isEdit ? (
+                    <Button
+                      onClick={editMe}
+                      variant="contained"
+                      color="warning"
+                    >
+                      Edit
+                    </Button>
+                  ) : (
+                    <div>
+                      <Button
+                        onClick={updateMe}
+                        variant="contained"
+                        color="success"
+                      >
+                        Send
+                      </Button>{" "}
+                      <Button
+                        onClick={back}
+                        variant="contained"
+                        color="inherit"
+                      >
+                        Back
+                      </Button>
+                    </div>
+                  )}
                 </td>
               </tr>
             </tfoot>
