@@ -6,6 +6,7 @@ import styles from "./Friends.module.css";
 import { Button, Paper } from "@mui/material";
 
 import {
+  fetchGetMe,
   fetchGetAllUsers,
   selectorAllUsers,
   selectorMyFriends,
@@ -20,16 +21,19 @@ const Friends = () => {
     dispatch(fetchGetAllUsers());
   }, [dispatch]);
 
+  const updateFriends = () => {
+    dispatch(fetchGetMe());
+    dispatch(fetchGetAllUsers());
+  };
+
   return (
     <div className={styles.content}>
       <div>
         <div className={styles.header}>
           <h2>Friends</h2>
-          <Link to="/home/users">
-            <Button variant="contained" color="inherit">
-              Back
-            </Button>
-          </Link>
+          <Button onClick={updateFriends} variant="contained" color="secondary">
+            Update
+          </Button>
         </div>
         {users
           .filter((f) => friends.includes(f._id))
