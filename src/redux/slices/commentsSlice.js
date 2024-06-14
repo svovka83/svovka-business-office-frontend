@@ -9,11 +9,13 @@ export const fetchGetAllComments = createAsyncThunk(
   }
 );
 
+const initialState = {
+  comments: [],
+};
+
 const commentsSlice = createSlice({
   name: "comments",
-  initialState: {
-    comments: [],
-  },
+  initialState,
   reducers: {},
   selectors: {
     selectorAllComments: (state) => state.comments,

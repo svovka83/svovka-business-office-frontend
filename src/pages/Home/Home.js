@@ -18,6 +18,7 @@ import ProgramsRoute from "./sideBar/ProgramsRoute/ProgramsRoute";
 import AllUsers from "./content/Users/AllUsers";
 import User from "./content/Users/User/User";
 import Friends from "./content/Users/Friends/Friends";
+import Dialog from "./content/Users/Dialogs/Dialog";
 import MyProfile from "./content/Users/MyProfile/MyProfile";
 
 import Posts from "./content/Posts/Posts";
@@ -72,6 +73,7 @@ const Home = () => {
               <Route path="/users" element={<AllUsers />} />
               <Route path="/users/:id" element={<User />} />
               <Route path="/users/friends" element={<Friends />} />
+              <Route path="/users/dialog/:id" element={<Dialog />} />
               <Route path="/users/profile" element={<MyProfile />} />
             </Routes>
           </div>

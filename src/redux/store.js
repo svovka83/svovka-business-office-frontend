@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { userReducer } from "./slices/usersSlice";
+import { usersReducer } from "./slices/usersSlice";
 import { postsReducer } from "./slices/postsSlice";
 import { commentsReducer } from "./slices/commentsSlice";
+import { dialogsReducer } from "./slices/dialogsSlice";
 
 const store = configureStore({
   reducer: {
-    user: userReducer,
+    users: usersReducer,
     posts: postsReducer,
     comments: commentsReducer,
+    dialogs: dialogsReducer,
   },
 });
 

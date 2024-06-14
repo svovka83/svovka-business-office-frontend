@@ -69,8 +69,8 @@ const initialState = {
   status: "loading",
 };
 
-const userSlice = createSlice({
-  name: "user",
+const usersSlice = createSlice({
+  name: "users",
   initialState,
   reducers: {
     logOut: (state) => {
@@ -194,7 +194,7 @@ export const {
   selectorAllUsers,
   selectorOneUser,
   selectorStatus,
-} = userSlice.selectors;
+} = usersSlice.selectors;
 export const {
   logOut,
   changeAge,
@@ -202,6 +202,6 @@ export const {
   changeStatus,
   changeCountry,
   changeJob,
-} = userSlice.actions;
+} = usersSlice.actions;
 
-export const userReducer = userSlice.reducer;
+export const usersReducer = usersSlice.reducer;
