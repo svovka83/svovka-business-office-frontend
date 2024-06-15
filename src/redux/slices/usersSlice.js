@@ -66,7 +66,7 @@ const initialState = {
   me: null,
   users: [],
   user: {},
-  status: "loading",
+  status: null,
 };
 
 const usersSlice = createSlice({
@@ -112,9 +112,11 @@ const usersSlice = createSlice({
 
     builder.addCase(fetchLogin.pending, (state) => {
       state.me = null;
+      state.status = "loading";
     });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.me = action.payload;
+      state.status = "loaded";
     });
     builder.addCase(fetchLogin.rejected, (state) => {
       state.me = null;

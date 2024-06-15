@@ -6,6 +6,7 @@ import styles from "./Dialog.module.css";
 import { Button, TextField } from "@mui/material";
 
 import {
+  fetchGetDialog,
   fetchUpdateDialog,
   selectorDialog,
   selectorStatusDialog,
@@ -13,6 +14,7 @@ import {
 import {
   fetchGetMe,
   fetchGetOneUser,
+  selectorFullData,
   selectorOneUser,
 } from "../../../../../redux/slices/usersSlice";
 
@@ -20,11 +22,13 @@ const Dialog = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { dialog } = useSelector(selectorDialog);
+  const me = useSelector(selectorFullData);
   const { fullName } = useSelector(selectorOneUser);
   const status = useSelector(selectorStatusDialog);
 
   React.useEffect(() => {
     dispatch(fetchGetOneUser(id));
+    dispatch(fetchGetDialog(id));
   }, [dispatch, id]);
 
   const updatePage = () => {
@@ -35,7 +39,7 @@ const Dialog = () => {
 
   const sendMessage = () => {
     const fields = {
-      dialog: message,
+      dialog: `${me.fullName}: ` + message,
     };
     dispatch(fetchUpdateDialog({ id, fields }));
     setMessage("")

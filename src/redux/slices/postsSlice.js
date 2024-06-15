@@ -17,6 +17,29 @@ export const fetchGetOnePost = createAsyncThunk(
   }
 );
 
+export const fetchUpdatePost = createAsyncThunk(
+  "posts/fetchUpdatePost",
+  async ({ id, fields }) => {
+    const { data } = await axios.put(`/posts/${id}`, fields);
+    return data;
+  }
+);
+
+export const fetchAddLike = createAsyncThunk(
+  "posts/fetchAddLike",
+  async ({ id, fields }) => {
+    const { data } = await axios.put(`/posts/${id}`, fields);
+    return data;
+  }
+);
+export const fetchRemoveLike = createAsyncThunk(
+  "posts/fetchRemoveLike",
+  async ({ id, fields }) => {
+    const { data } = await axios.put(`/posts/${id}`, fields);
+    return data;
+  }
+);
+
 const initialState = {
   posts: [],
   post: {},
@@ -56,6 +79,42 @@ const postsSlice = createSlice({
       state.status = "loaded";
     });
     builder.addCase(fetchGetOnePost.rejected, (state) => {
+      state.post = {};
+    });
+
+    builder.addCase(fetchUpdatePost.pending, (state) => {
+      state.post = {};
+      state.status = "loading";
+    });
+    builder.addCase(fetchUpdatePost.fulfilled, (state, action) => {
+      state.post = action.payload;
+      state.status = "loaded";
+    });
+    builder.addCase(fetchUpdatePost.rejected, (state) => {
+      state.post = {};
+    });
+
+    builder.addCase(fetchAddLike.pending, (state) => {
+      state.post = {};
+      state.status = "loading";
+    });
+    builder.addCase(fetchAddLike.fulfilled, (state, action) => {
+      state.post = action.payload;
+      state.status = "loaded";
+    });
+    builder.addCase(fetchAddLike.rejected, (state) => {
+      state.post = {};
+    });
+
+    builder.addCase(fetchRemoveLike.pending, (state) => {
+      state.post = {};
+      state.status = "loading";
+    });
+    builder.addCase(fetchRemoveLike.fulfilled, (state, action) => {
+      state.post = action.payload;
+      state.status = "loaded";
+    });
+    builder.addCase(fetchRemoveLike.rejected, (state) => {
       state.post = {};
     });
   },

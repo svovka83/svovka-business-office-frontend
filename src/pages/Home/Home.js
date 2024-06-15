@@ -47,7 +47,7 @@ const Home = () => {
   return (
     <div>
       {status === "loading" ? (
-        "... Loading"
+        <div className={styles.loading}><h1>... Loading</h1></div>
       ) : (
         <div className={screen ? styles.home : ""}>
           <div>

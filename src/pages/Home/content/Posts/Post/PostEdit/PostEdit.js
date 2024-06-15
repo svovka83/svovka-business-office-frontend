@@ -3,14 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Likes from "./Likes/Likes";
 
-import axios from "../../../../../../axios";
-
 import styles from "./PostEdit.module.css";
 import { Button, TextField } from "@mui/material";
 
 import { selectorFullData } from "../../../../../../redux/slices/usersSlice";
 import {
-  fetchGetOnePost,
+  fetchUpdatePost,
   selectorOnePost,
 } from "../../../../../../redux/slices/postsSlice";
 
@@ -37,14 +35,13 @@ const PostEdit = (props) => {
   };
 
   const updatePost = async () => {
+    const id = props.id;
     const fields = {
       title,
       text,
-      viewCount: post.viewCount - 1,
     };
-    await axios.put(`/posts/${props.id}`, fields);
+    dispatch(fetchUpdatePost({ id, fields }));
     setIsEditable(false);
-    dispatch(fetchGetOnePost(props.id));
   };
 
   return (

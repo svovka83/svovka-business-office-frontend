@@ -23,3 +23,12 @@
 .paper:hover {
   transform: scale(1.03);
 }
+
+.friend {
+  color: green;
+  font-size: 20px;
+}
+.not_friend {
+  color: red;
+  font-size: 20px;
+}

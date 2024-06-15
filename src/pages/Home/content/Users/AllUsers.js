@@ -37,9 +37,15 @@ const AllUsers = () => {
           <Link to={`/home/users/${users._id}`} key={users._id}>
             <div className={styles.users}>
               <Paper className={styles.paper} elevation={5}>
-                <h4>{users.fullName}</h4>
+                <h3>{users.fullName}</h3>
                 <p>{users.email}</p>
-                <p>
+                <p
+                  className={
+                    me.friends.includes(users._id)
+                      ? styles.friend
+                      : styles.not_friend
+                  }
+                >
                   {me.friends.includes(users._id)
                     ? "my friend"
                     : "not my friend"}

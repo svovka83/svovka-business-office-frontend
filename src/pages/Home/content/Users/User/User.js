@@ -63,7 +63,7 @@ const User = () => {
       </div>
       <div>
         <Paper className={styles.paper} elevation={5}>
-          <h4>{user.fullName}</h4>
+          <h3>{user.fullName}</h3>
           {friends.includes(user._id) ? (
             <div>
               <p>Age: {user.age}</p>
