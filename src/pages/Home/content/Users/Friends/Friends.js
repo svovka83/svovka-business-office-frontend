@@ -41,12 +41,9 @@ const Friends = () => {
               <div className={styles.users}>
                 <Paper className={styles.paper} elevation={5}>
                   <h4>{users.fullName}</h4>
-                  <p>Age: {users.age}</p>
-                  <p>Gender: {users.gender}</p>
-                  <p>Status: {users.status}</p>
-                  <p>Country: {users.country}</p>
-                  <p>Job: {users.job}</p>
-                  <p>Email: {users.email}</p>
+                  <p><b>Age:</b> {users.age}</p>
+                  <p><b>Country:</b> {users.country}</p>
+                  <p><i><b>Email:</b> {users.email}</i></p>
                 </Paper>
               </div>
             </Link>

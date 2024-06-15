@@ -114,25 +114,25 @@ const MyProfile = () => {
                       <FormControlLabel
                         onChange={changeGenderHandler}
                         value="female"
-                        control={<Radio />}
+                        control={<Radio checked={me.gender === "female"} />}
                         label="Female"
                       />
                       <FormControlLabel
                         onChange={changeGenderHandler}
                         value="male"
-                        control={<Radio />}
+                        control={<Radio checked={me.gender === "male"} />}
                         label="Male"
                       />
                       <FormControlLabel
                         onChange={changeGenderHandler}
                         value="gender"
-                        control={<Radio />}
+                        control={<Radio checked={me.gender === "gender"} />}
                         label="Gender"
                       />
                       <FormControlLabel
                         onChange={changeGenderHandler}
                         value="other"
-                        control={<Radio />}
+                        control={<Radio checked={me.gender === "other"} />}
                         label="Other"
                       />
                     </RadioGroup>
@@ -184,25 +184,25 @@ const MyProfile = () => {
                       <FormControlLabel
                         onChange={changeEducationHandler}
                         value="technical"
-                        control={<Radio />}
+                        control={<Radio  checked={me.education === "technical"} />}
                         label="Technical"
                       />
                       <FormControlLabel
                         onChange={changeEducationHandler}
                         value="economic"
-                        control={<Radio />}
+                        control={<Radio checked={me.education === "economic"} />}
                         label="Economic"
                       />
                       <FormControlLabel
                         onChange={changeEducationHandler}
-                        value="humanitarian "
-                        control={<Radio />}
+                        value="humanitarian"
+                        control={<Radio checked={me.education === "humanitarian"} />}
                         label="Humanitarian "
                       />
                       <FormControlLabel
                         onChange={changeEducationHandler}
                         value="other"
-                        control={<Radio />}
+                        control={<Radio checked={me.education === "other"} />}
                         label="Other"
                       />
                     </RadioGroup>

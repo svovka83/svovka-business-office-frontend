@@ -66,47 +66,39 @@ const User = () => {
           <h3>{user.fullName}</h3>
           {friends.includes(user._id) ? (
             <div>
-              <p>Age: {user.age}</p>
-              <p>Gender: {user.gender}</p>
-              <p>Status: {user.status}</p>
-              <p>Country: {user.country}</p>
-              <p>Education: {user.education}</p>
-              <p>Job: {user.job}</p>
-              <p>Hobby: {user.hobby}</p>
-
+              <p><b>Age:</b> {user.age}</p>
+              <p><b>Gender:</b> {user.gender}</p>
+              <p><b>Status:</b> {user.status}</p>
+              <p><b>Country:</b> {user.country}</p>
+              <p><b>Education:</b> {user.education}</p>
+              <p><b>Job:</b> {user.job}</p>
+              <p><b>Hobby:</b> {user.hobby}</p>
             </div>
           ) : (
             ""
           )}
-          <p>{user.email}</p>
-          <Button
-            disabled={!friends.includes(user._id)}
-            onClick={goToDialog}
-            variant="contained"
-            color="secondary"
-          >
-            Dialog
-          </Button>
+          <p><i>{user.email}</i></p>
+          {friends.includes(user._id) ? (
+            <div>
+              <Button
+                onClick={goToDialog}
+                variant="contained"
+                color="secondary"
+              >
+                Message
+              </Button>
+              <br />
+              <br />
+              <Button onClick={removeFriend} variant="contained" color="error">
+                Remove from friends
+              </Button>
+            </div>
+          ) : (
+            <Button onClick={addFriend} variant="contained" color="success">
+              Add to friends
+            </Button>
+          )}
           <br />
-          <br />
-          <Button
-            disabled={friends.includes(user._id)}
-            onClick={addFriend}
-            variant="contained"
-            color="success"
-          >
-            Add to friends
-          </Button>
-          <br />
-          <br />
-          <Button
-            disabled={!friends.includes(user._id)}
-            onClick={removeFriend}
-            variant="contained"
-            color="error"
-          >
-            Remove from friends
-          </Button>
         </Paper>
       </div>
     </div>
