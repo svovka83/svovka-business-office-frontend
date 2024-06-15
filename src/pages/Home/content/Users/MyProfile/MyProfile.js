@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./MyProfile.module.css";
 import Paper from "@mui/material/Paper";
-import { Button, TextField } from "@mui/material";
+import { Button, Checkbox, TextField } from "@mui/material";
 
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -20,7 +20,9 @@ import {
   changeGender,
   changeStatus,
   changeCountry,
+  changeEducation,
   changeJob,
+  changeHobby,
 } from "../../../../../redux/slices/usersSlice";
 
 const MyProfile = () => {
@@ -33,10 +35,20 @@ const MyProfile = () => {
   const changeGenderHandler = (e) =>
     dispatch(changeGender(e.currentTarget.value));
   const changeStatusHandler = (e) => dispatch(changeStatus(e.target.value));
-  const changeCountryHandler = (e) => {
-    dispatch(changeCountry(e.target.value));
-  };
+  const changeCountryHandler = (e) => dispatch(changeCountry(e.target.value));
+  const changeEducationHandler = (e) =>
+    dispatch(changeEducation(e.currentTarget.value));
   const changeJobHandler = (e) => dispatch(changeJob(e.target.value));
+
+  const changeHobbyHandler = (e) => {
+    if (me.hobby.includes(e.currentTarget.value)) {
+      let data = me.hobby.filter((h) => h !== e.currentTarget.value);
+      dispatch(changeHobby(data));
+    } else {
+      let data = [...me.hobby, e.currentTarget.value];
+      dispatch(changeHobby(data));
+    }
+  };
 
   const editMe = () => {
     setIsEdit(false);
@@ -49,7 +61,9 @@ const MyProfile = () => {
         gender: me.gender,
         status: me.status,
         country: me.country,
+        education: me.education,
         job: me.job,
+        hobby: me.hobby,
       };
       dispatch(fetchUpdateMe(fields));
       setIsEdit(true);
@@ -96,7 +110,7 @@ const MyProfile = () => {
                   {isEdit ? (
                     me.gender
                   ) : (
-                    <RadioGroup>
+                    <RadioGroup row>
                       <FormControlLabel
                         onChange={changeGenderHandler}
                         value="female"
@@ -108,6 +122,12 @@ const MyProfile = () => {
                         value="male"
                         control={<Radio />}
                         label="Male"
+                      />
+                      <FormControlLabel
+                        onChange={changeGenderHandler}
+                        value="gender"
+                        control={<Radio />}
+                        label="Gender"
                       />
                       <FormControlLabel
                         onChange={changeGenderHandler}
@@ -155,12 +175,110 @@ const MyProfile = () => {
                 </td>
               </tr>
               <tr>
+                <th>Education:</th>
+                <td>
+                  {isEdit ? (
+                    me.education
+                  ) : (
+                    <RadioGroup row>
+                      <FormControlLabel
+                        onChange={changeEducationHandler}
+                        value="technical"
+                        control={<Radio />}
+                        label="Technical"
+                      />
+                      <FormControlLabel
+                        onChange={changeEducationHandler}
+                        value="economic"
+                        control={<Radio />}
+                        label="Economic"
+                      />
+                      <FormControlLabel
+                        onChange={changeEducationHandler}
+                        value="humanitarian "
+                        control={<Radio />}
+                        label="Humanitarian "
+                      />
+                      <FormControlLabel
+                        onChange={changeEducationHandler}
+                        value="other"
+                        control={<Radio />}
+                        label="Other"
+                      />
+                    </RadioGroup>
+                  )}
+                </td>
+              </tr>
+              <tr>
                 <th>Job:</th>
                 <td>
                   {isEdit ? (
                     me.job
                   ) : (
                     <TextField onChange={changeJobHandler} value={me.job} />
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <th>Hobby:</th>
+                <td>
+                  {isEdit ? (
+                    me.hobby.join(", ")
+                  ) : (
+                    <>
+                      <RadioGroup row>
+                        <FormControlLabel
+                          onChange={changeHobbyHandler}
+                          value="reading"
+                          control={
+                            <Checkbox checked={me.hobby.includes("reading")} />
+                          }
+                          label="Reading"
+                        />
+                        <FormControlLabel
+                          onChange={changeHobbyHandler}
+                          value="music"
+                          control={
+                            <Checkbox checked={me.hobby.includes("music")} />
+                          }
+                          label="Music"
+                        />
+                        <FormControlLabel
+                          onChange={changeHobbyHandler}
+                          value="drawing"
+                          control={
+                            <Checkbox checked={me.hobby.includes("drawing")} />
+                          }
+                          label="Drawing"
+                        />
+                        <FormControlLabel
+                          onChange={changeHobbyHandler}
+                          value="sport"
+                          control={
+                            <Checkbox checked={me.hobby.includes("sport")} />
+                          }
+                          label="Sport"
+                        />
+                        <FormControlLabel
+                          onChange={changeHobbyHandler}
+                          value="traveling"
+                          control={
+                            <Checkbox
+                              checked={me.hobby.includes("traveling")}
+                            />
+                          }
+                          label="Traveling"
+                        />
+                        <FormControlLabel
+                          onChange={changeHobbyHandler}
+                          value="cooking"
+                          control={
+                            <Checkbox checked={me.hobby.includes("cooking")} />
+                          }
+                          label="Cooking"
+                        />
+                      </RadioGroup>
+                    </>
                   )}
                 </td>
               </tr>

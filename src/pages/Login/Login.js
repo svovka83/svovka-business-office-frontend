@@ -37,7 +37,7 @@ const Login = () => {
   if (isAuth) {
     const { token } = data;
     window.localStorage.setItem("token", token);
-    return <Navigate to="/" />;
+    return <Navigate to="/home" />;
   }
 
   return (

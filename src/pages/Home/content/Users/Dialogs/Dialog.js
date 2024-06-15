@@ -37,9 +37,11 @@ const Dialog = () => {
 
   const [message, setMessage] = React.useState("");
 
+  const inputMessage = `${me.fullName}: ` + message
+
   const sendMessage = () => {
     const fields = {
-      dialog: `${me.fullName}: ` + message,
+      dialog: inputMessage,
     };
     dispatch(fetchUpdateDialog({ id, fields }));
     setMessage("")

@@ -88,8 +88,14 @@ const usersSlice = createSlice({
     changeCountry: (state, action) => {
       state.me.country = action.payload;
     },
+    changeEducation: (state, action) => {
+      state.me.education = action.payload;
+    },
     changeJob: (state, action) => {
       state.me.job = action.payload;
+    },
+    changeHobby: (state, action) => {
+      state.me.hobby = action.payload;
     },
   },
   selectors: {
@@ -123,7 +129,6 @@ const usersSlice = createSlice({
     });
 
     builder.addCase(fetchGetMe.pending, (state) => {
-      state.me = null;
       state.status = "loading";
     });
     builder.addCase(fetchGetMe.fulfilled, (state, action) => {
@@ -203,7 +208,9 @@ export const {
   changeGender,
   changeStatus,
   changeCountry,
+  changeEducation,
   changeJob,
+  changeHobby,
 } = usersSlice.actions;
 
 export const usersReducer = usersSlice.reducer;

@@ -70,7 +70,10 @@ const User = () => {
               <p>Gender: {user.gender}</p>
               <p>Status: {user.status}</p>
               <p>Country: {user.country}</p>
+              <p>Education: {user.education}</p>
               <p>Job: {user.job}</p>
+              <p>Hobby: {user.hobby}</p>
+
             </div>
           ) : (
             ""
