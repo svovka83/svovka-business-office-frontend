@@ -39,7 +39,6 @@ const MyProfile = () => {
   const changeEducationHandler = (e) =>
     dispatch(changeEducation(e.currentTarget.value));
   const changeJobHandler = (e) => dispatch(changeJob(e.target.value));
-
   const changeHobbyHandler = (e) => {
     if (me.hobby.includes(e.currentTarget.value)) {
       let data = me.hobby.filter((h) => h !== e.currentTarget.value);
@@ -184,19 +183,25 @@ const MyProfile = () => {
                       <FormControlLabel
                         onChange={changeEducationHandler}
                         value="technical"
-                        control={<Radio  checked={me.education === "technical"} />}
+                        control={
+                          <Radio checked={me.education === "technical"} />
+                        }
                         label="Technical"
                       />
                       <FormControlLabel
                         onChange={changeEducationHandler}
                         value="economic"
-                        control={<Radio checked={me.education === "economic"} />}
+                        control={
+                          <Radio checked={me.education === "economic"} />
+                        }
                         label="Economic"
                       />
                       <FormControlLabel
                         onChange={changeEducationHandler}
                         value="humanitarian"
-                        control={<Radio checked={me.education === "humanitarian"} />}
+                        control={
+                          <Radio checked={me.education === "humanitarian"} />
+                        }
                         label="Humanitarian "
                       />
                       <FormControlLabel

@@ -1,20 +1,20 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-
 import { Link, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 
 import styles from "./Login.module.css";
 import { Button, TextField, Paper } from "@mui/material";
 import {
   fetchLogin,
+  selectorIsAuth,
   selectorFullData,
   selectorStatus,
 } from "../../redux/slices/usersSlice";
 
 const Login = () => {
-  const data = useSelector(selectorFullData);
-  const isAuth = Boolean(data);
+  const isAuth = useSelector(selectorIsAuth);
+  const me = useSelector(selectorFullData);
   const dispatch = useDispatch();
   const status = useSelector(selectorStatus);
 
@@ -35,7 +35,7 @@ const Login = () => {
   };
 
   if (isAuth) {
-    const { token } = data;
+    const { token } = me;
     window.localStorage.setItem("token", token);
     return <Navigate to="/home" />;
   }

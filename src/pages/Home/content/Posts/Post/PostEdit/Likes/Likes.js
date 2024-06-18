@@ -35,9 +35,7 @@ export const Likes = (props) => {
 
   return (
     <>
-      {status === "loading" ? (
-        "... loading"
-      ) : post.userLikes.includes(me._id) ? (
+      {status === "loaded" && post.userLikes.includes(me._id) ? (
         <span
           onClick={removeLike}
           title="I don`t like it!"

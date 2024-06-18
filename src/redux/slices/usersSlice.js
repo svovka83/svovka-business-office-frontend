@@ -22,6 +22,14 @@ export const fetchGetMe = createAsyncThunk("user/fetchGetMe", async () => {
   return data;
 });
 
+export const fetchUpdateAvatar = createAsyncThunk(
+  "user/fetchUpdateAvatar",
+  async (formData) => {
+    const { data } = await axios.post("/upload", formData);
+    return data;
+  }
+);
+
 export const fetchUpdateMe = createAsyncThunk(
   "user/fetchUpdateMe",
   async (fields) => {
@@ -100,6 +108,7 @@ const usersSlice = createSlice({
   },
   selectors: {
     selectorFullData: (state) => state.me,
+    selectorIsAuth: (state) => Boolean(state.me),
     selectorMyFriends: (state) => state.me.friends,
     selectorAllUsers: (state) => state.users,
     selectorOneUser: (state) => state.user,
@@ -129,6 +138,7 @@ const usersSlice = createSlice({
     });
 
     builder.addCase(fetchGetMe.pending, (state) => {
+      state.me = null;
       state.status = "loading";
     });
     builder.addCase(fetchGetMe.fulfilled, (state, action) => {
@@ -136,6 +146,19 @@ const usersSlice = createSlice({
       state.status = "loaded";
     });
     builder.addCase(fetchGetMe.rejected, (state) => {
+      state.me = null;
+      state.status = "error";
+    });
+
+    builder.addCase(fetchUpdateAvatar.pending, (state) => {
+      state.me = null;
+      state.status = "loading";
+    });
+    builder.addCase(fetchUpdateAvatar.fulfilled, (state, action) => {
+      state.me = action.payload;
+      state.status = "loaded";
+    });
+    builder.addCase(fetchUpdateAvatar.rejected, (state) => {
       state.me = null;
     });
 
@@ -197,6 +220,7 @@ const usersSlice = createSlice({
 
 export const {
   selectorFullData,
+  selectorIsAuth,
   selectorMyFriends,
   selectorAllUsers,
   selectorOneUser,

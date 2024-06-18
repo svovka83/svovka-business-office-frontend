@@ -4,15 +4,20 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-import { fetchRegister, selectorFullData, selectorStatus } from "../../redux/slices/usersSlice";
+import {
+  fetchRegister,
+  selectorIsAuth,
+  selectorFullData,
+  selectorStatus,
+} from "../../redux/slices/usersSlice";
 
 import { Button, Paper, TextField } from "@mui/material";
 
 const Registration = () => {
+  const isAuth = useSelector(selectorIsAuth);
+  const me = useSelector(selectorFullData);
   const dispatch = useDispatch();
   const status = useSelector(selectorStatus);
-  const data = useSelector(selectorFullData);
-  const isAuth = Boolean(data);
 
   const {
     register,
@@ -32,13 +37,13 @@ const Registration = () => {
   };
 
   if (isAuth) {
-    const { token } = data;
+    const { token } = me;
     window.localStorage.setItem("token", token);
     return <Navigate to="/home" />;
   }
 
   return (
-    <div  className={styles.register}>
+    <div className={styles.register}>
       {status === "loading" ? (
         <h1>... Loading</h1>
       ) : (

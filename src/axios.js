@@ -1,8 +1,10 @@
 import axios from "axios";
 
+export const serverURL = "http://localhost:5555";
+// export const serverURL = "https://svovka-business-office-backend.onrender.com";
+
 const instance = axios.create({
-  baseURL: "http://localhost:5555",
-  // baseURL: "https://svovka-business-office-backend.onrender.com",
+  baseURL: serverURL,
 });
 
 instance.interceptors.request.use((config) => {

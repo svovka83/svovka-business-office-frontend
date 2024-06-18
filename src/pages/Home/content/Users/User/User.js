@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./User.module.css";
 import Paper from "@mui/material/Paper";
-import { Button } from "@mui/material";
+import { Avatar, Button, Grid } from "@mui/material";
 
 import {
   fetchGetOneUser,
@@ -19,6 +19,7 @@ import {
   fetchDeleteDialog,
   clearDialog,
 } from "../../../../../redux/slices/dialogsSlice";
+import { serverURL } from "../../../../../axios";
 
 const User = () => {
   const navigate = useNavigate();
@@ -61,46 +62,83 @@ const User = () => {
           </Button>
         </Link>
       </div>
-      <div>
-        <Paper className={styles.paper} elevation={5}>
-          <h3>{user.fullName}</h3>
-          {friends.includes(user._id) ? (
-            <div>
-              <p><b>Age:</b> {user.age}</p>
-              <p><b>Gender:</b> {user.gender}</p>
-              <p><b>Status:</b> {user.status}</p>
-              <p><b>Country:</b> {user.country}</p>
-              <p><b>Education:</b> {user.education}</p>
-              <p><b>Job:</b> {user.job}</p>
-              <p><b>Hobby:</b> {user.hobby}</p>
-            </div>
-          ) : (
-            ""
-          )}
-          <p><i>{user.email}</i></p>
-          {friends.includes(user._id) ? (
-            <div>
-              <Button
-                onClick={goToDialog}
-                variant="contained"
-                color="secondary"
-              >
-                Message
+      <Paper className={styles.user} elevation={5}>
+        <Grid container>
+          <Grid xs={12} md={4}>
+            <p>
+              {user.urlAvatar ? (
+                <img
+                  className={styles.avatarYes}
+                  src={`${serverURL}/${user.urlAvatar}`}
+                  alt="avatar"
+                />
+              ) : (
+                <Avatar
+                  sx={{ width: 150, height: 150 }}
+                  className={styles.avatarNo}
+                />
+              )}
+            </p>
+            <h3>{user.fullName}</h3>
+            <p>
+              <i>{user.email}</i>
+            </p>
+            {friends.includes(user._id) ? (
+              <div>
+                <Button
+                  onClick={goToDialog}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Message
+                </Button>
+                <br />
+                <br />
+                <Button
+                  onClick={removeFriend}
+                  variant="contained"
+                  color="error"
+                >
+                  Remove from friends
+                </Button>
+              </div>
+            ) : (
+              <Button onClick={addFriend} variant="contained" color="success">
+                Add to friends
               </Button>
-              <br />
-              <br />
-              <Button onClick={removeFriend} variant="contained" color="error">
-                Remove from friends
-              </Button>
-            </div>
-          ) : (
-            <Button onClick={addFriend} variant="contained" color="success">
-              Add to friends
-            </Button>
-          )}
-          <br />
-        </Paper>
-      </div>
+            )}
+          </Grid>
+          <Grid xs={12} md={8}>
+            {friends.includes(user._id) ? (
+              <div>
+                <p>
+                  <b>Age:</b> {user.age}
+                </p>
+                <p>
+                  <b>Gender:</b> {user.gender}
+                </p>
+                <p>
+                  <b>Status:</b> {user.status}
+                </p>
+                <p>
+                  <b>Country:</b> {user.country}
+                </p>
+                <p>
+                  <b>Education:</b> {user.education}
+                </p>
+                <p>
+                  <b>Job:</b> {user.job}
+                </p>
+                <p>
+                  <b>Hobby:</b> {user.hobby}
+                </p>
+              </div>
+            ) : (
+              ""
+            )}
+          </Grid>
+        </Grid>
+      </Paper>
     </div>
   );
 };

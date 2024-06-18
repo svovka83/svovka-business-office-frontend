@@ -8,10 +8,19 @@
   padding: 20px 0;
 }
 
-.paper {
+.user {
   text-align: center;
-  width: 300px;
+  width: 90%;
   margin: 20px auto;
-  padding-top: 10px;
+  padding: 10px;
   padding-bottom: 25px;
+}
+
+.avatarYes {
+  width: 150px;
+  border-radius: 20%;
+}
+
+.avatarNo {
+  margin: 0 auto;
 }

@@ -1,16 +1,16 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectorFullData,
   selectorStatus,
-  fetchGetMe,
 } from "../../redux/slices/usersSlice";
 
 import styles from "./Home.module.css";
 
 import SideBar from "./sideBar/SideBar";
+import UserAvatar from "./sideBar/UserAvatar/UserAvatar";
 import UsersRoute from "./sideBar/UsersRoute/UsersRoute";
 import PostsRoute from "./sideBar/PostsRoute/PostsRoute";
 import ProgramsRoute from "./sideBar/ProgramsRoute/ProgramsRoute";
@@ -29,9 +29,8 @@ import Calculator from "./content/ProgramsContent/Calculator/Calculator";
 import Timer from "./content/ProgramsContent/Timer/Timer";
 
 const Home = () => {
-  const dispatch = useDispatch();
   const status = useSelector(selectorStatus);
-  const data = useSelector(selectorFullData);
+  const me = useSelector(selectorFullData);
   const [screen, setScreen] = React.useState(true);
 
   React.useEffect(() => {
@@ -40,20 +39,13 @@ const Home = () => {
     }
   }, []);
 
-  React.useEffect(() => {
-    dispatch(fetchGetMe());
-  }, [dispatch]);
-
   return (
     <div>
-      {status === "loading" ? (
-        <div className={styles.loading}><h1>... Loading</h1></div>
-      ) : (
+      {status === "loaded" && (
         <div className={screen ? styles.home : ""}>
-          <div>
-            <h2 className={styles.welcome}>
-              Welcome {data ? data.fullName : "user"}{" "}
-            </h2>
+          <div className={styles.welcome}>
+            <h2>Welcome {me.fullName} </h2>
+            <UserAvatar />
             <Routes>
               <Route path="/*" element={<SideBar />} />
               <Route path="/users/*" element={<UsersRoute />} />

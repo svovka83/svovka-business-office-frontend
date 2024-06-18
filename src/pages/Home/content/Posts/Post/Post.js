@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import PostEdit from "./PostEdit/PostEdit";
 import PostComments from "./PostComments/PostComments";
@@ -12,7 +12,6 @@ import { Button } from "@mui/material";
 
 import {
   fetchGetOnePost,
-  selectorStatusPost,
 } from "../../../../../redux/slices/postsSlice";
 import { fetchGetAllComments } from "../../../../../redux/slices/commentsSlice";
 
@@ -20,7 +19,6 @@ const Post = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const status = useSelector(selectorStatusPost);
 
   React.useEffect(() => {
     dispatch(fetchGetOnePost(id));
@@ -43,15 +41,11 @@ const Post = () => {
             Back
           </Button>
         </Link>
-      </div>
-      {status === "loading" ? (
-        "... loading"
-      ) : (
-        <>
+      </div>  
+        <div>
           <PostEdit id={id} removePost={removePost} />
           <PostComments id={id} />
-        </>
-      )}
+        </div>
     </div>
   );
 };

@@ -32,3 +32,12 @@
   color: red;
   font-size: 20px;
 }
+
+.avatarYes {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.avatarNo {
+  margin: 0 auto;
+}
