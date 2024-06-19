@@ -8,6 +8,7 @@ import {
 } from "../../redux/slices/usersSlice";
 
 import styles from "./Home.module.css";
+import { Grid } from "@mui/material";
 
 import SideBar from "./sideBar/SideBar";
 import UserAvatar from "./sideBar/UserAvatar/UserAvatar";
@@ -31,19 +32,12 @@ import Timer from "./content/ProgramsContent/Timer/Timer";
 const Home = () => {
   const status = useSelector(selectorStatus);
   const me = useSelector(selectorFullData);
-  const [screen, setScreen] = React.useState(true);
-
-  React.useEffect(() => {
-    if (window.innerWidth < 600) {
-      return setScreen(false);
-    }
-  }, []);
 
   return (
     <div>
       {status === "loaded" && (
-        <div className={screen ? styles.home : ""}>
-          <div className={styles.welcome}>
+        <Grid container>
+          <Grid xs={12} sm={4} md={3} lg={2} className={styles.welcome}>
             <h2>Welcome {me.fullName} </h2>
             <UserAvatar />
             <Routes>
@@ -52,8 +46,8 @@ const Home = () => {
               <Route path="/posts/*" element={<PostsRoute />} />
               <Route path="/programs/*" element={<ProgramsRoute />} />
             </Routes>
-          </div>
-          <div>
+          </Grid>
+          <Grid xs={12} sm={8} md={9} lg={10}>
             <Routes>
               <Route path="/posts" element={<Posts />} />
               <Route path="/posts/:id" element={<Post />} />
@@ -68,8 +62,8 @@ const Home = () => {
               <Route path="/users/dialog/:id" element={<Dialog />} />
               <Route path="/users/profile" element={<MyProfile />} />
             </Routes>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       )}
     </div>
   );

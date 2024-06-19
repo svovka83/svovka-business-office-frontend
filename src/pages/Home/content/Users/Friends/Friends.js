@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./Friends.module.css";
-import { Button, Paper } from "@mui/material";
+import { Avatar, Button, Paper } from "@mui/material";
 
 import {
   fetchGetMe,
@@ -11,6 +11,7 @@ import {
   selectorAllUsers,
   selectorMyFriends,
 } from "../../../../../redux/slices/usersSlice";
+import { serverURL } from "../../../../../axios";
 
 const Friends = () => {
   const dispatch = useDispatch();
@@ -40,10 +41,32 @@ const Friends = () => {
             <Link to={`/home/users/${users._id}`} key={users._id}>
               <div className={styles.users}>
                 <Paper className={styles.paper} elevation={5}>
-                  <h4>{users.fullName}</h4>
-                  <p><b>Age:</b> {users.age}</p>
-                  <p><b>Country:</b> {users.country}</p>
-                  <p><i><b>Email:</b> {users.email}</i></p>
+                  <h3>{users.fullName}</h3>
+                  <p>
+                    {users.urlAvatar ? (
+                      <img
+                        className={styles.avatarYes}
+                        src={`${serverURL}/${users.urlAvatar}`}
+                        alt="avatar"
+                      />
+                    ) : (
+                      <Avatar
+                        sx={{ width: 150, height: 150 }}
+                        className={styles.avatarNo}
+                      />
+                    )}
+                  </p>
+                  <p>
+                    <b>Age:</b> {users.age}
+                  </p>
+                  <p>
+                    <b>Country:</b> {users.country}
+                  </p>
+                  <p>
+                    <i>
+                      <b>Email:</b> {users.email}
+                    </i>
+                  </p>
                 </Paper>
               </div>
             </Link>

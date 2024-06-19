@@ -1,8 +1,3 @@
-.home {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-}
-
 .welcome {
   text-align: center;
   background: #eee;

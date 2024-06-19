@@ -130,7 +130,7 @@ const User = () => {
                   <b>Job:</b> {user.job}
                 </p>
                 <p>
-                  <b>Hobby:</b> {user.hobby}
+                  <b>Hobby:</b> {user.hobby.join(", ")}
                 </p>
               </div>
             ) : (

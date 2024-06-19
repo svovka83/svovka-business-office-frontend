@@ -56,7 +56,6 @@ const AllUsers = () => {
                       />
                     )}
                   </p>
-                  <p>{users.email}</p>
                   <p
                     className={
                       me.friends.includes(users._id)

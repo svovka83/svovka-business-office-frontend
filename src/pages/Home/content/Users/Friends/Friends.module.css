@@ -23,3 +23,12 @@
 .paper:hover {
   transform: scale(1.03);
 }
+
+.avatarYes {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.avatarNo {
+  margin: 0 auto;
+}
