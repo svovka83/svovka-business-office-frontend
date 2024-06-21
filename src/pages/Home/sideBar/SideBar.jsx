@@ -20,6 +20,13 @@ export const SideBar = () => {
       </Link>
       <br />
       <br />
+      <Link to="/home/chat_form">
+        <Button variant="contained" color="info" className={styles.button_size}>
+          Chat
+        </Button>
+      </Link>
+      <br />
+      <br />
       <Link to="/home/programs">
         <Button variant="contained" color="info" className={styles.button_size}>
           Programs

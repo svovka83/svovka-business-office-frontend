@@ -12,34 +12,35 @@ import {
   selectorOnePost,
 } from "../../../../../../redux/slices/postsSlice";
 
+const FIELDS = {
+  TITLE: "title",
+  TEXT: "text",
+};
+
 const PostEdit = (props) => {
   const dispatch = useDispatch();
   const user = useSelector(selectorFullData);
   const post = useSelector(selectorOnePost);
 
-  const [isEditable, setIsEditable] = React.useState(false);
-  const [title, setTitle] = React.useState();
-  const [text, setText] = React.useState();
+  const { TITLE, TEXT } = FIELDS;
 
-  const changeTitle = (event) => {
-    setTitle(event.target.value);
-  };
-  const changeText = (event) => {
-    setText(event.target.value);
-  };
+  const [fields, setFields] = React.useState();
+  const [isEditable, setIsEditable] = React.useState(false);
 
   const forEdit = () => {
-    setTitle(post.title);
-    setText(post.text);
+    setFields({
+      [TITLE]: post.title,
+      [TEXT]: post.text,
+    });
     setIsEditable(true);
+  };
+
+  const changeFields = ({ target: { name, value } }) => {
+    setFields({ ...fields, [name]: value });
   };
 
   const updatePost = async () => {
     const id = props.id;
-    const fields = {
-      title,
-      text,
-    };
     dispatch(fetchUpdatePost({ id, fields }));
     setIsEditable(false);
   };
@@ -51,8 +52,9 @@ const PostEdit = (props) => {
         <h3>
           {isEditable ? (
             <TextField
-              onChange={changeTitle}
-              value={title}
+              onChange={changeFields}
+              name="title"
+              value={fields[TITLE]}
               variant="standard"
             />
           ) : (
@@ -89,8 +91,9 @@ const PostEdit = (props) => {
         <div className={styles.text}>
           {isEditable ? (
             <TextField
-              onChange={changeText}
-              value={text}
+              onChange={changeFields}
+              name="text"
+              value={fields[TEXT]}
               multiline
               rows={4}
               fullWidth

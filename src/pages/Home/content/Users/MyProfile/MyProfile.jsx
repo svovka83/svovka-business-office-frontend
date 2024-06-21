@@ -16,8 +16,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import {
   fetchUpdateMe,
   selectorFullData,
-  changeAge,
-  changeGender,
   changeStatus,
   changeCountry,
   changeEducation,
@@ -25,15 +23,21 @@ import {
   changeHobby,
 } from "../../../../../redux/slices/usersSlice";
 
+const FIELDS = {
+  AGE: "age",
+  GENDER: "gender",
+};
+
 const MyProfile = () => {
   const dispatch = useDispatch();
   const me = useSelector(selectorFullData);
 
   const [isEdit, setIsEdit] = React.useState(true);
+  const [fields, setFields] = React.useState();
 
-  const changeAgeHandler = (e) => dispatch(changeAge(e.target.value));
-  const changeGenderHandler = (e) =>
-    dispatch(changeGender(e.currentTarget.value));
+  const changeProfile = ({ currentTarget: { name, value } }) =>
+    setFields({ ...fields, [name]: value });
+
   const changeStatusHandler = (e) => dispatch(changeStatus(e.target.value));
   const changeCountryHandler = (e) => dispatch(changeCountry(e.target.value));
   const changeEducationHandler = (e) =>
@@ -50,20 +54,23 @@ const MyProfile = () => {
   };
 
   const editMe = () => {
+    setFields({ [FIELDS.AGE]: me.age, [FIELDS.GENDER]: me.gender });
     setIsEdit(false);
   };
 
+  // console.log(fields);
+
   const updateMe = () => {
     if (window.confirm(`${me.fullName}, you want update profile?`)) {
-      const fields = {
-        age: me.age,
-        gender: me.gender,
-        status: me.status,
-        country: me.country,
-        education: me.education,
-        job: me.job,
-        hobby: me.hobby,
-      };
+      // const fields = {
+      //   age: me.age,
+      //   gender: me.gender,
+      //   status: me.status,
+      //   country: me.country,
+      //   education: me.education,
+      //   job: me.job,
+      //   hobby: me.hobby,
+      // };
       dispatch(fetchUpdateMe(fields));
       setIsEdit(true);
     }
@@ -99,7 +106,11 @@ const MyProfile = () => {
                   {isEdit ? (
                     me.age
                   ) : (
-                    <TextField onChange={changeAgeHandler} value={me.age} />
+                    <TextField
+                      onChange={changeProfile}
+                      name="age"
+                      value={fields[FIELDS.AGE]}
+                    />
                   )}
                 </td>
               </tr>
@@ -109,29 +120,29 @@ const MyProfile = () => {
                   {isEdit ? (
                     me.gender
                   ) : (
-                    <RadioGroup row>
+                    <RadioGroup name="gender" value={fields[FIELDS.GENDER]} row>
                       <FormControlLabel
-                        onChange={changeGenderHandler}
+                        onChange={changeProfile}
                         value="female"
-                        control={<Radio checked={me.gender === "female"} />}
+                        control={<Radio />}
                         label="Female"
                       />
                       <FormControlLabel
-                        onChange={changeGenderHandler}
+                        onChange={changeProfile}
                         value="male"
-                        control={<Radio checked={me.gender === "male"} />}
+                        control={<Radio />}
                         label="Male"
                       />
                       <FormControlLabel
-                        onChange={changeGenderHandler}
+                        onChange={changeProfile}
                         value="gender"
-                        control={<Radio checked={me.gender === "gender"} />}
+                        control={<Radio />}
                         label="Gender"
                       />
                       <FormControlLabel
-                        onChange={changeGenderHandler}
+                        onChange={changeProfile}
                         value="other"
-                        control={<Radio checked={me.gender === "other"} />}
+                        control={<Radio />}
                         label="Other"
                       />
                     </RadioGroup>

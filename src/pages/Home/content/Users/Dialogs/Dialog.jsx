@@ -2,6 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import io from "socket.io-client";
+
 import styles from "./Dialog.module.css";
 import { Button, TextField } from "@mui/material";
 
@@ -17,6 +19,9 @@ import {
   selectorFullData,
   selectorOneUser,
 } from "../../../../../redux/slices/usersSlice";
+import { serverURL } from "../../../../../axios";
+
+const socket = io.connect(serverURL);
 
 const Dialog = () => {
   const { id } = useParams();
@@ -31,20 +36,37 @@ const Dialog = () => {
     dispatch(fetchGetDialog(id));
   }, [dispatch, id]);
 
+  React.useEffect(() => {
+    const userData = {
+      name: me.fullName,
+      room: "dialog",
+    };
+    socket.emit("join", userData);
+  }, [me.fullName]);
+  
+  // React.useEffect(() => {
+  //   socket.emit("message", {
+  //     user: {name: "admin"},
+  //     message: `Hello ${name}`
+  //   })
+  // }, [me.fullName]);
+
+
+
   const updatePage = () => {
     dispatch(fetchGetMe());
   };
 
   const [message, setMessage] = React.useState("");
 
-  const inputMessage = `${me.fullName}: ` + message
+  const inputMessage = `${me.fullName}: ` + message;
 
   const sendMessage = () => {
     const fields = {
       dialog: inputMessage,
     };
     dispatch(fetchUpdateDialog({ id, fields }));
-    setMessage("")
+    setMessage("");
   };
 
   return (

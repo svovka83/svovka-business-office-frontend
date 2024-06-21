@@ -29,6 +29,9 @@ import Post from "./content/Posts/Post/Post";
 import Calculator from "./content/ProgramsContent/Calculator/Calculator";
 import Timer from "./content/ProgramsContent/Timer/Timer";
 
+import ChatForm from "./content/ChatContent/ChatForm";
+import Chat from "./content/ChatContent/Chat/Chat";
+
 const Home = () => {
   const status = useSelector(selectorStatus);
   const me = useSelector(selectorFullData);
@@ -37,7 +40,7 @@ const Home = () => {
     <div>
       {status === "loaded" && (
         <Grid container>
-          <Grid xs={12} sm={4} md={3} lg={2} className={styles.welcome}>
+          <Grid item xs={12} sm={4} md={3} lg={2} className={styles.welcome}>
             <h2>Welcome {me.fullName} </h2>
             <UserAvatar />
             <Routes>
@@ -47,8 +50,14 @@ const Home = () => {
               <Route path="/programs/*" element={<ProgramsRoute />} />
             </Routes>
           </Grid>
-          <Grid xs={12} sm={8} md={9} lg={10}>
+          <Grid item xs={12} sm={8} md={9} lg={10}>
             <Routes>
+              <Route path="/users" element={<AllUsers />} />
+              <Route path="/users/:id" element={<User />} />
+              <Route path="/users/friends" element={<Friends />} />
+              <Route path="/users/dialog/:id" element={<Dialog />} />
+              <Route path="/users/profile" element={<MyProfile />} />
+
               <Route path="/posts" element={<Posts />} />
               <Route path="/posts/:id" element={<Post />} />
               <Route path="/posts/create_post" element={<CreatePost />} />
@@ -56,11 +65,8 @@ const Home = () => {
               <Route path="/programs/calculator" element={<Calculator />} />
               <Route path="/programs/timer" element={<Timer />} />
 
-              <Route path="/users" element={<AllUsers />} />
-              <Route path="/users/:id" element={<User />} />
-              <Route path="/users/friends" element={<Friends />} />
-              <Route path="/users/dialog/:id" element={<Dialog />} />
-              <Route path="/users/profile" element={<MyProfile />} />
+              <Route path="/chat_form" element={<ChatForm />} />
+              <Route path="/chat" element={<Chat />} />
             </Routes>
           </Grid>
         </Grid>

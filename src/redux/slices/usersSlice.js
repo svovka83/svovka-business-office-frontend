@@ -84,12 +84,7 @@ const usersSlice = createSlice({
     logOut: (state) => {
       state.me = null;
     },
-    changeAge: (state, action) => {
-      state.me.age = action.payload;
-    },
-    changeGender: (state, action) => {
-      state.me.gender = action.payload;
-    },
+
     changeStatus: (state, action) => {
       state.me.status = action.payload;
     },
@@ -228,8 +223,7 @@ export const {
 } = usersSlice.selectors;
 export const {
   logOut,
-  changeAge,
-  changeGender,
+
   changeStatus,
   changeCountry,
   changeEducation,
