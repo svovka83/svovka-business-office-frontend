@@ -21,7 +21,6 @@ const Chat = () => {
   React.useEffect(() => {
     const searchParams = Object.fromEntries(new URLSearchParams(search));
     setParams(searchParams);
-
     socket.emit("join", searchParams);
   }, [search]);
 
@@ -37,7 +36,7 @@ const Chat = () => {
   };
 
   const leaveRoom = () => {
-    socket.emit("leaveRoom", params );
+    socket.emit("leaveRoom", params);
     navigate("/home");
   };
 

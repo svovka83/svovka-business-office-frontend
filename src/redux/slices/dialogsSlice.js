@@ -25,14 +25,6 @@ export const fetchGetDialog = createAsyncThunk(
   }
 );
 
-export const fetchUpdateDialog = createAsyncThunk(
-  "dialogs/fetchUpdateDialog",
-  async ({ id, fields }) => {
-    const { data } = await axios.put(`/dialogs/${id}`, fields);
-    return data;
-  }
-);
-
 const initialState = {
   dialog: {},
   status: "loading",
@@ -80,18 +72,6 @@ const dialogsSlice = createSlice({
       state.status = "loaded";
     });
     builder.addCase(fetchGetDialog.rejected, (state) => {
-      state.dialog = {};
-    });
-
-    builder.addCase(fetchUpdateDialog.pending, (state) => {
-      state.dialog = {};
-      state.status = "loading";
-    });
-    builder.addCase(fetchUpdateDialog.fulfilled, (state, action) => {
-      state.dialog = action.payload;
-      state.status = "loaded";
-    });
-    builder.addCase(fetchUpdateDialog.rejected, (state) => {
       state.dialog = {};
     });
   },
