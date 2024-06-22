@@ -64,7 +64,7 @@ const User = () => {
       </div>
       <Paper className={styles.user} elevation={5}>
         <Grid container>
-          <Grid xs={12} md={4}>
+          <Grid item xs={12} md={4}>
             <p>
               {user.urlAvatar ? (
                 <img
@@ -108,7 +108,7 @@ const User = () => {
               </Button>
             )}
           </Grid>
-          <Grid xs={12} md={8}>
+          <Grid item xs={12} md={8}>
             {friends.includes(user._id) ? (
               <div>
                 <p>

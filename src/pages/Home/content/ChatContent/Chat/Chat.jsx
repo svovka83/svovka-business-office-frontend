@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import EmojiPicker from "emoji-picker-react";
 
 import styles from "./Chat.module.css";
@@ -12,6 +12,7 @@ const socket = io.connect(serverURL);
 
 const Chat = () => {
   const { search } = useLocation();
+  const navigate = useNavigate();
   const [params, setParams] = React.useState({});
   const [messages, setMessages] = React.useState([]);
   const [message, setMessage] = React.useState("");
@@ -25,27 +26,29 @@ const Chat = () => {
   }, [search]);
 
   React.useEffect(() => {
-    socket.on("message", ({ user, message }) => {
-      setMessages([...messages, `${user.name}: ` + message]);
-    });
-  }, [messages]);
-
-  React.useEffect(() => {
-    socket.on("returnMessage", ({message, params}) => {
-      const textMessage = `${params.name}: ` + message;
-      setMessages([...messages, textMessage]);
-      console.log(textMessage);
+    socket.on("message", ({ params, message }) => {
+      setMessages([...messages, `${params.name}: ` + message]);
     });
   }, [messages]);
 
   const handleChangeMessage = () => {
-    socket.emit("sendMessage", {message, params})
+    socket.emit("sendMessage", { params, message });
     setMessage("");
+  };
+
+  const leaveRoom = () => {
+    socket.emit("leaveRoom", params );
+    navigate("/home");
   };
 
   return (
     <div className={styles.content}>
-      <h2>Chat: {params.room}</h2>
+      <div className={styles.header}>
+        <h2>Chat: {params.room}</h2>
+        <Button onClick={leaveRoom} variant="contained" color="secondary">
+          leave
+        </Button>
+      </div>
       <div>
         <div className={styles.block}>
           <TextField
@@ -64,12 +67,13 @@ const Chat = () => {
         </div>
         <div className={styles.block}>
           <div>
-            {messages.map((m) => (
-              <p>{m}</p>
+            {messages.map((messages, index) => (
+              <p key={index}>{messages}</p>
             ))}
           </div>
           <div>
-            <span className={styles.smiles}
+            <span
+              className={styles.smiles}
               onClick={() => {
                 setIsOpen(!isOpen);
               }}

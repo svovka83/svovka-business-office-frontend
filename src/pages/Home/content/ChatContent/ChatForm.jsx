@@ -17,7 +17,6 @@ const ChatForm = () => {
   const { NAME, ROOM } = FIELDS;
 
   const [values, setValues] = React.useState({ [NAME]: me.fullName, [ROOM]: "Room" });
-  console.log(values)
 
   const handleChange = ({ target: { name, value } }) => {
     setValues({ ...values, [name]: value });

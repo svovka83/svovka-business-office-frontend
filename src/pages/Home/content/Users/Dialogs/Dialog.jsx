@@ -14,14 +14,13 @@ import {
   selectorStatusDialog,
 } from "../../../../../redux/slices/dialogsSlice";
 import {
-  fetchGetMe,
   fetchGetOneUser,
   selectorFullData,
   selectorOneUser,
 } from "../../../../../redux/slices/usersSlice";
 import { serverURL } from "../../../../../axios";
 
-const socket = io.connect(serverURL);
+// const socket = io.connect(serverURL);
 
 const Dialog = () => {
   const { id } = useParams();
@@ -31,33 +30,19 @@ const Dialog = () => {
   const { fullName } = useSelector(selectorOneUser);
   const status = useSelector(selectorStatusDialog);
 
+  const [messages, setMessages] = React.useState(dialog);
+  const [message, setMessage] = React.useState("");
+
+  console.log(dialog, messages);
+
   React.useEffect(() => {
     dispatch(fetchGetOneUser(id));
     dispatch(fetchGetDialog(id));
   }, [dispatch, id]);
 
   React.useEffect(() => {
-    const userData = {
-      name: me.fullName,
-      room: "dialog",
-    };
-    socket.emit("join", userData);
-  }, [me.fullName]);
-  
-  // React.useEffect(() => {
-  //   socket.emit("message", {
-  //     user: {name: "admin"},
-  //     message: `Hello ${name}`
-  //   })
-  // }, [me.fullName]);
-
-
-
-  const updatePage = () => {
-    dispatch(fetchGetMe());
-  };
-
-  const [message, setMessage] = React.useState("");
+    // socket.emit("join", { room: "dialog" });
+  }, []);
 
   const inputMessage = `${me.fullName}: ` + message;
 
@@ -65,16 +50,21 @@ const Dialog = () => {
     const fields = {
       dialog: inputMessage,
     };
+    // socket.emit("sendMessage", inputMessage);
     dispatch(fetchUpdateDialog({ id, fields }));
     setMessage("");
   };
+
+  // React.useEffect(() => {
+  //   socket.on("returnMessage", () => {});
+  // }, [inputMessage]);
 
   return (
     <div className={styles.content}>
       <div className={styles.header}>
         <h2>Dialog with {fullName}</h2>
-        <Button onClick={updatePage} variant="contained" color="secondary">
-          Update
+        <Button variant="contained" color="secondary">
+          back
         </Button>
       </div>
       <div>
@@ -92,7 +82,9 @@ const Dialog = () => {
         <div>
           {status === "loading"
             ? "... loading"
-            : dialog.toReversed().map((d) => <p key={d}>{d}</p>)}
+            : dialog
+                .toReversed()
+                .map((dialog, index) => <p key={index}>{dialog}</p>)}
         </div>
       </div>
     </div>
