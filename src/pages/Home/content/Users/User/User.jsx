@@ -12,13 +12,11 @@ import {
   fetchRemoveFriend,
   selectorOneUser,
   selectorMyFriends,
-  selectorFullData,
 } from "../../../../../redux/slices/usersSlice";
 import {
   fetchGetDialog,
   fetchCreateDialog,
   fetchDeleteDialog,
-  selectorDialog,
 } from "../../../../../redux/slices/dialogsSlice";
 import { serverURL } from "../../../../../axios";
 
@@ -28,8 +26,6 @@ const User = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectorOneUser);
   const friends = useSelector(selectorMyFriends);
-  const { _id } = useSelector(selectorDialog);
-  const me = useSelector(selectorFullData);
 
   React.useEffect(() => {
     dispatch(fetchGetDialog(id));
@@ -37,7 +33,7 @@ const User = () => {
   }, [dispatch, id]);
 
   const goToDialog = () => {
-    navigate(`/home/users/dialog/${id}?name=${me.fullName}&room=${_id}`);
+    navigate(`/home/users/dialog/${id}`);
   };
   const addFriend = () => {
     if (window.confirm(`Do you want add ${user.fullName}.`)) {
