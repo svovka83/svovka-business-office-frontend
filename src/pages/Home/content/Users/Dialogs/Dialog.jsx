@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import axios from "../../../../../axios";
 import io from "socket.io-client";
@@ -19,34 +19,33 @@ const socket = io.connect(serverURL);
 
 const Dialog = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const { _id, dialog } = useSelector(selectorDialog);
   const me = useSelector(selectorFullData);
   const { fullName } = useSelector(selectorOneUser);
+  const { _id, dialog } = useSelector(selectorDialog);
 
-  const [messages, setMessages] = React.useState(dialog);
   const [message, setMessage] = React.useState("");
+  const [messages, setMessages] = React.useState(dialog);
 
   React.useEffect(() => {
-    socket.emit("let", { room: _id });
-  }, [dispatch, id, _id]);
+    socket.emit("join_dialog", { room: _id });
+  }, [_id]);
 
   React.useEffect(() => {
-    socket.on("returnMessage", (fields) => {
-      setMessages([...messages, fields.dialog]);
+    socket.on("returnDialog", ({ dialog }) => {
+      setMessages([...messages, dialog]);
     });
   }, [messages]);
 
-  const inputMessage = `${me.fullName}: ` + message;
-
   const sendMessage = async () => {
     const fields = {
-      dialog: inputMessage,
+      dialog: `${me.fullName}: ` + message,
     };
     await axios.put(`/dialogs/${id}`, fields);
-    socket.emit("sendMessage", fields);
+    socket.emit("sendDialog", fields);
     setMessage("");
   };
+
+  console.log(messages);
 
   return (
     <div className={styles.content}>
@@ -70,9 +69,13 @@ const Dialog = () => {
             Send message
           </Button>
         </div>
-        <div>
+        <div className={styles.display_messages}>
           {messages.toReversed().map((messages, index) => (
-            <p key={index}>{messages}</p>
+            <span className={styles.messages}>
+              <p className={styles.message} key={index}>
+                {messages}
+              </p>
+            </span>
           ))}
         </div>
       </div>

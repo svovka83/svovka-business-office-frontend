@@ -16,16 +16,16 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import {
   fetchUpdateMe,
   selectorFullData,
-  changeStatus,
-  changeCountry,
-  changeEducation,
-  changeJob,
-  changeHobby,
 } from "../../../../../redux/slices/usersSlice";
 
 const FIELDS = {
   AGE: "age",
   GENDER: "gender",
+  STATUS: "status",
+  COUNTRY: "country",
+  EDUCATION: "education",
+  JOB: "job",
+  HOBBY: "hobby",
 };
 
 const MyProfile = () => {
@@ -35,42 +35,34 @@ const MyProfile = () => {
   const [isEdit, setIsEdit] = React.useState(true);
   const [fields, setFields] = React.useState();
 
-  const changeProfile = ({ currentTarget: { name, value } }) =>
+  const changeProfile = ({ target: { name, value } }) =>
     setFields({ ...fields, [name]: value });
 
-  const changeStatusHandler = (e) => dispatch(changeStatus(e.target.value));
-  const changeCountryHandler = (e) => dispatch(changeCountry(e.target.value));
-  const changeEducationHandler = (e) =>
-    dispatch(changeEducation(e.currentTarget.value));
-  const changeJobHandler = (e) => dispatch(changeJob(e.target.value));
   const changeHobbyHandler = (e) => {
-    if (me.hobby.includes(e.currentTarget.value)) {
-      let data = me.hobby.filter((h) => h !== e.currentTarget.value);
-      dispatch(changeHobby(data));
+    if (fields.hobby.includes(e.currentTarget.value)) {
+      let hobby = fields.hobby.filter((h) => h !== e.currentTarget.value);
+      setFields({ ...fields, hobby });
     } else {
-      let data = [...me.hobby, e.currentTarget.value];
-      dispatch(changeHobby(data));
+      let hobby = [...fields.hobby, e.currentTarget.value];
+      setFields({ ...fields, hobby });
     }
   };
 
   const editMe = () => {
-    setFields({ [FIELDS.AGE]: me.age, [FIELDS.GENDER]: me.gender });
+    setFields({
+      [FIELDS.AGE]: me.age,
+      [FIELDS.GENDER]: me.gender,
+      [FIELDS.STATUS]: me.status,
+      [FIELDS.COUNTRY]: me.country,
+      [FIELDS.EDUCATION]: me.education,
+      [FIELDS.JOB]: me.job,
+      [FIELDS.HOBBY]: me.hobby,
+    });
     setIsEdit(false);
   };
 
-  // console.log(fields);
-
   const updateMe = () => {
     if (window.confirm(`${me.fullName}, you want update profile?`)) {
-      // const fields = {
-      //   age: me.age,
-      //   gender: me.gender,
-      //   status: me.status,
-      //   country: me.country,
-      //   education: me.education,
-      //   job: me.job,
-      //   hobby: me.hobby,
-      // };
       dispatch(fetchUpdateMe(fields));
       setIsEdit(true);
     }
@@ -156,8 +148,9 @@ const MyProfile = () => {
                     me.status
                   ) : (
                     <TextField
-                      onChange={changeStatusHandler}
-                      value={me.status}
+                      onChange={changeProfile}
+                      name="status"
+                      value={fields[FIELDS.STATUS]}
                     />
                   )}
                 </td>
@@ -168,7 +161,11 @@ const MyProfile = () => {
                   {isEdit ? (
                     me.country
                   ) : (
-                    <Select onChange={changeCountryHandler} value={me.country}>
+                    <Select
+                      onChange={changeProfile}
+                      name="country"
+                      value={fields[FIELDS.COUNTRY]}
+                    >
                       <MenuItem value="Ukraine">Ukraine</MenuItem>
                       <MenuItem value="USA">USA</MenuItem>
                       <MenuItem value="Great Britain">Great Britain</MenuItem>
@@ -190,35 +187,33 @@ const MyProfile = () => {
                   {isEdit ? (
                     me.education
                   ) : (
-                    <RadioGroup row>
+                    <RadioGroup
+                      name="education"
+                      value={fields[FIELDS.EDUCATION]}
+                      row
+                    >
                       <FormControlLabel
-                        onChange={changeEducationHandler}
+                        onChange={changeProfile}
                         value="technical"
-                        control={
-                          <Radio checked={me.education === "technical"} />
-                        }
+                        control={<Radio />}
                         label="Technical"
                       />
                       <FormControlLabel
-                        onChange={changeEducationHandler}
+                        onChange={changeProfile}
                         value="economic"
-                        control={
-                          <Radio checked={me.education === "economic"} />
-                        }
+                        control={<Radio />}
                         label="Economic"
                       />
                       <FormControlLabel
-                        onChange={changeEducationHandler}
+                        onChange={changeProfile}
                         value="humanitarian"
-                        control={
-                          <Radio checked={me.education === "humanitarian"} />
-                        }
+                        control={<Radio />}
                         label="Humanitarian "
                       />
                       <FormControlLabel
-                        onChange={changeEducationHandler}
+                        onChange={changeProfile}
                         value="other"
-                        control={<Radio checked={me.education === "other"} />}
+                        control={<Radio />}
                         label="Other"
                       />
                     </RadioGroup>
@@ -231,7 +226,11 @@ const MyProfile = () => {
                   {isEdit ? (
                     me.job
                   ) : (
-                    <TextField onChange={changeJobHandler} value={me.job} />
+                    <TextField
+                      onChange={changeProfile}
+                      name="job"
+                      value={fields[FIELDS.JOB]}
+                    />
                   )}
                 </td>
               </tr>
@@ -247,7 +246,9 @@ const MyProfile = () => {
                           onChange={changeHobbyHandler}
                           value="reading"
                           control={
-                            <Checkbox checked={me.hobby.includes("reading")} />
+                            <Checkbox
+                              checked={fields.hobby.includes("reading")}
+                            />
                           }
                           label="Reading"
                         />
@@ -255,7 +256,9 @@ const MyProfile = () => {
                           onChange={changeHobbyHandler}
                           value="music"
                           control={
-                            <Checkbox checked={me.hobby.includes("music")} />
+                            <Checkbox
+                              checked={fields.hobby.includes("music")}
+                            />
                           }
                           label="Music"
                         />
@@ -263,7 +266,9 @@ const MyProfile = () => {
                           onChange={changeHobbyHandler}
                           value="drawing"
                           control={
-                            <Checkbox checked={me.hobby.includes("drawing")} />
+                            <Checkbox
+                              checked={fields.hobby.includes("drawing")}
+                            />
                           }
                           label="Drawing"
                         />
@@ -271,7 +276,9 @@ const MyProfile = () => {
                           onChange={changeHobbyHandler}
                           value="sport"
                           control={
-                            <Checkbox checked={me.hobby.includes("sport")} />
+                            <Checkbox
+                              checked={fields.hobby.includes("sport")}
+                            />
                           }
                           label="Sport"
                         />
@@ -280,7 +287,7 @@ const MyProfile = () => {
                           value="traveling"
                           control={
                             <Checkbox
-                              checked={me.hobby.includes("traveling")}
+                              checked={fields.hobby.includes("traveling")}
                             />
                           }
                           label="Traveling"
@@ -289,7 +296,9 @@ const MyProfile = () => {
                           onChange={changeHobbyHandler}
                           value="cooking"
                           control={
-                            <Checkbox checked={me.hobby.includes("cooking")} />
+                            <Checkbox
+                              checked={fields.hobby.includes("cooking")}
+                            />
                           }
                           label="Cooking"
                         />

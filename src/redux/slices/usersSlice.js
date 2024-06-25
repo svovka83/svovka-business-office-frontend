@@ -84,22 +84,6 @@ const usersSlice = createSlice({
     logOut: (state) => {
       state.me = null;
     },
-
-    changeStatus: (state, action) => {
-      state.me.status = action.payload;
-    },
-    changeCountry: (state, action) => {
-      state.me.country = action.payload;
-    },
-    changeEducation: (state, action) => {
-      state.me.education = action.payload;
-    },
-    changeJob: (state, action) => {
-      state.me.job = action.payload;
-    },
-    changeHobby: (state, action) => {
-      state.me.hobby = action.payload;
-    },
   },
   selectors: {
     selectorFullData: (state) => state.me,
@@ -112,9 +96,11 @@ const usersSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchRegister.pending, (state) => {
       state.me = null;
+      state.status = "loading";
     });
     builder.addCase(fetchRegister.fulfilled, (state, action) => {
       state.me = action.payload;
+      state.status = "loaded";
     });
     builder.addCase(fetchRegister.rejected, (state) => {
       state.me = null;
@@ -221,14 +207,6 @@ export const {
   selectorOneUser,
   selectorStatus,
 } = usersSlice.selectors;
-export const {
-  logOut,
-
-  changeStatus,
-  changeCountry,
-  changeEducation,
-  changeJob,
-  changeHobby,
-} = usersSlice.actions;
+export const { logOut } = usersSlice.actions;
 
 export const usersReducer = usersSlice.reducer;

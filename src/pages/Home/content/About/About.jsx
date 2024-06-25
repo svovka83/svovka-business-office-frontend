@@ -1,15 +1,8 @@
-import styles from "./Start.module.css";
+import styles from "./About.module.css";
 
-const Start = () => {
+const About = () => {
   return (
-    <div className={styles.start}>
-      <h1>Welcome to site!</h1>
-      <img
-        className={styles.start_image}
-        src="DSC00237.JPG"
-        alt="start content"
-      />
-          <div className={styles.content}>
+    <div className={styles.content}>
       <h1>Про сайт</h1>
       <p className={styles.text}>
         Мета розробки проєкту спрямована на його функціонал. Використовуючи
@@ -31,15 +24,14 @@ const Start = () => {
         платформу Render, фронтенду - на Netlify.
       </p>
       <p>
-        <a className={styles.text} href="https://svovka-business-office.netlify.app/" target="_blank">
-          <i >
+        <a href="https://svovka-business-office.netlify.app/" target="_blank">
+          <i className={styles.text}>
             https://svovka-business-office.netlify.app/
           </i>
         </a>
       </p>
     </div>
-    </div>
   );
 };
 
-export default Start;
+export default About;

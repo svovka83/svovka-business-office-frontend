@@ -16,6 +16,8 @@ import UsersRoute from "./sideBar/UsersRoute/UsersRoute";
 import PostsRoute from "./sideBar/PostsRoute/PostsRoute";
 import ProgramsRoute from "./sideBar/ProgramsRoute/ProgramsRoute";
 
+import About from "./content/About/About";
+
 import AllUsers from "./content/Users/AllUsers";
 import User from "./content/Users/User/User";
 import Friends from "./content/Users/Friends/Friends";
@@ -52,6 +54,8 @@ const Home = () => {
           </Grid>
           <Grid item xs={12} sm={8} md={9} lg={10}>
             <Routes>
+              <Route path="/" element={<About />} />
+
               <Route path="/users" element={<AllUsers />} />
               <Route path="/users/:id" element={<User />} />
               <Route path="/users/friends" element={<Friends />} />

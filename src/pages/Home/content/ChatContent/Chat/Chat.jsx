@@ -14,14 +14,14 @@ const Chat = () => {
   const { search } = useLocation();
   const navigate = useNavigate();
   const [params, setParams] = React.useState({});
-  const [messages, setMessages] = React.useState([]);
   const [message, setMessage] = React.useState("");
+  const [messages, setMessages] = React.useState([]);
   const [isOpen, setIsOpen] = React.useState(false);
 
   React.useEffect(() => {
     const searchParams = Object.fromEntries(new URLSearchParams(search));
     setParams(searchParams);
-    socket.emit("join", searchParams);
+    socket.emit("join_chat", searchParams);
   }, [search]);
 
   React.useEffect(() => {
@@ -41,7 +41,7 @@ const Chat = () => {
   };
 
   return (
-    <div className={styles.content}>
+    <div>
       <div className={styles.header}>
         <h2>Chat: {params.room}</h2>
         <Button onClick={leaveRoom} variant="contained" color="secondary">
@@ -52,24 +52,11 @@ const Chat = () => {
         <div className={styles.block}>
           <TextField
             className={styles.input}
-            onChange={({ target: { value } }) => setMessage(value)}
+            onChange={(event) => setMessage(event.target.value)}
             value={message}
+            placeholder="input here your message"
             multiline
           />
-          <Button
-            onClick={handleChangeMessage}
-            variant="contained"
-            color="success"
-          >
-            Send
-          </Button>
-        </div>
-        <div className={styles.block}>
-          <div>
-            {messages.map((messages, index) => (
-              <p key={index}>{messages}</p>
-            ))}
-          </div>
           <div>
             <span
               className={styles.smiles}
@@ -79,17 +66,33 @@ const Chat = () => {
             >
               😀
             </span>
-            <span>
+            <span className={styles.emoji}>
               {isOpen && (
                 <EmojiPicker
                   onEmojiClick={({ emoji }) => {
-                    setMessage(` ${message} ${emoji}`);
+                    setMessage(`${message} ${emoji}`);
                   }}
                 />
               )}
             </span>
           </div>
+          <Button
+            onClick={handleChangeMessage}
+            variant="contained"
+            color="success"
+          >
+            Send
+          </Button>
         </div>
+      </div>
+      <div className={styles.display_messages}>
+        {messages.toReversed().map((messages, index) => (
+          <span className={styles.messages}>
+            <p className={styles.message} key={index}>
+              {messages}
+            </p>
+          </span>
+        ))}
       </div>
     </div>
   );

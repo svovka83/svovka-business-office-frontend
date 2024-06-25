@@ -1,13 +1,33 @@
-.content {
-  text-align: center;
-}
-
 .header {
   display: flex;
   justify-content: space-around;
   padding: 20px 0;
+  text-align: center;
 }
 
 .input_message {
   width: 50%;
+}
+
+.display_messages {
+  background-color: rgb(226, 194, 255);
+  padding-top: 10px;
+  margin: 5%;
+  border: 3px solid;
+  border-radius: 10px;
+  height: 500px;
+}
+
+.messages {
+  display: flex;
+  padding: 10px;
+}
+
+.message {
+  background-color: rgb(106, 0, 206);
+  box-sizing: content-box;
+  color: white;
+  padding: 10px;
+  margin: 0 20px;
+  border-radius: 10px;
 }
