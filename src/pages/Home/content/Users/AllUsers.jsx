@@ -47,7 +47,7 @@ const AllUsers = () => {
                       <img
                         className={styles.avatarYes}
                         src={`${serverURL}/${users.urlAvatar}`}
-                        alt="avatar"
+                        alt=" avatar"
                       />
                     ) : (
                       <Avatar

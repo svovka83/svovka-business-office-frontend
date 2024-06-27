@@ -5,12 +5,14 @@ import { useForm } from "react-hook-form";
 
 import styles from "./Login.module.css";
 import { Button, TextField, Paper } from "@mui/material";
+
 import {
   fetchLogin,
   selectorIsAuth,
   selectorFullData,
   selectorStatus,
 } from "../../redux/slices/usersSlice";
+import Circular from "../../utils/CircularProgress";
 
 const Login = () => {
   const isAuth = useSelector(selectorIsAuth);
@@ -43,7 +45,7 @@ const Login = () => {
   return (
     <div className={styles.login}>
       {status === "loading" ? (
-        <h1>... Loading</h1>
+        <Circular />
       ) : (
         <div>
           <Paper className={styles.paper}>
@@ -88,6 +90,8 @@ const Login = () => {
           <Link to="/register">
             <Button variant="contained">Registration</Button>
           </Link>
+          <br />
+          <br />
         </div>
       )}
     </div>

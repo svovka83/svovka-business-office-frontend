@@ -27,7 +27,7 @@ export const fetchGetDialog = createAsyncThunk(
 
 const initialState = {
   dialog: {},
-  status: "loading",
+  status: null,
 };
 
 const dialogsSlice = createSlice({
@@ -65,11 +65,9 @@ const dialogsSlice = createSlice({
 
     builder.addCase(fetchGetDialog.pending, (state) => {
       state.dialog = {};
-      state.status = "loading";
     });
     builder.addCase(fetchGetDialog.fulfilled, (state, action) => {
       state.dialog = action.payload;
-      state.status = "loaded";
     });
     builder.addCase(fetchGetDialog.rejected, (state) => {
       state.dialog = {};

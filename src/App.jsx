@@ -7,8 +7,10 @@ import Start from "./pages/Start/Start";
 import Registration from "./pages/Registration/Registration";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
+import Footer from "./Footer/Footer";
 
 import { fetchGetMe, selectorStatus } from "./redux/slices/usersSlice";
+import Circular from "./utils/CircularProgress";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,20 +21,21 @@ function App() {
   }, [dispatch]);
 
   if (status === "loading") {
-    <h1>... Loading</h1>;
+    <Circular />;
   }
 
   return (
     <div>
-        <div>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Start />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Registration />} />
-            <Route path="/home/*" element={<Home />} />
-          </Routes>
-        </div>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Start />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/home/*" element={<Home />} />
+        </Routes>
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -34,9 +34,15 @@ import Timer from "./content/ProgramsContent/Timer/Timer";
 import ChatForm from "./content/ChatContent/ChatForm";
 import Chat from "./content/ChatContent/Chat/Chat";
 
+import Circular from "../../utils/CircularProgress";
+
 const Home = () => {
   const status = useSelector(selectorStatus);
   const me = useSelector(selectorFullData);
+
+  if (status === "loading") {
+    return <Circular />;
+  }
 
   return (
     <div>

@@ -1,8 +1,9 @@
-import styles from "./Registration.module.css";
-
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+
+import styles from "./Registration.module.css";
+import { Button, Paper, TextField } from "@mui/material";
 
 import {
   fetchRegister,
@@ -10,8 +11,7 @@ import {
   selectorFullData,
   selectorStatus,
 } from "../../redux/slices/usersSlice";
-
-import { Button, Paper, TextField } from "@mui/material";
+import Circular from "../../utils/CircularProgress";
 
 const Registration = () => {
   const isAuth = useSelector(selectorIsAuth);
@@ -45,7 +45,9 @@ const Registration = () => {
   return (
     <div className={styles.register}>
       {status === "loading" ? (
-        <h1>... Loading</h1>
+        <h1>
+          <Circular />
+        </h1>
       ) : (
         <div>
           <Paper className={styles.paper}>

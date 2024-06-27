@@ -87,7 +87,7 @@ const Chat = () => {
       </div>
       <div className={styles.display_messages}>
         {messages.toReversed().map((messages, index) => (
-          <span className={styles.messages}>
+          <span className={styles.messages} key={index}>
             <p className={styles.message} key={index}>
               {messages}
             </p>

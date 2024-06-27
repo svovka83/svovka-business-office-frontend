@@ -74,7 +74,7 @@ const initialState = {
   me: null,
   users: [],
   user: {},
-  status: null,
+  status: "loading",
 };
 
 const usersSlice = createSlice({

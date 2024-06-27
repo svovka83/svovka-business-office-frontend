@@ -1,0 +1,11 @@
+.footer {
+  text-align: center;
+  background-color: slategrey;
+}
+
+.content {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  padding: 20px 0;
+}
