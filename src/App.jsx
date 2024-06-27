@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Header from "./Header/Header";
 import Start from "./pages/Start/Start";
-import Registration from "./pages/Registration/Registration";
 import Login from "./pages/Login/Login";
+import Registration from "./pages/Registration/Registration";
+import Preview from "./pages/Preview/Preview";
 import Home from "./pages/Home/Home";
 import Footer from "./Footer/Footer";
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" element={<Start />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
+          <Route path="/preview" element={<Preview />} />
           <Route path="/home/*" element={<Home />} />
         </Routes>
         <Footer />

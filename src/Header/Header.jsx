@@ -25,33 +25,39 @@ const Header = () => {
 
   return (
     <div>
-        <div className={styles.header}>
-          <div>
-            {isAuth ? (
+      <div className={styles.header}>
+        <div>
+          {isAuth ? (
+            <div>
               <Link to="/home">
                 <Button variant="contained">{me.fullName}</Button>
               </Link>
-            ) : (
-              <h3>Not authorized</h3>
-            )}
-          </div>
-          <h1>Svovka business office</h1>
-          <div>
-            {isAuth ? (
-              <Button
-                variant="contained"
-                color="warning"
-                onClick={onClickLogOut}
-              >
-                Log out
-              </Button>
-            ) : (
-              <Link to="/login">
-                <Button variant="contained">Log in</Button>
-              </Link>
-            )}
-          </div>
+            </div>
+          ) : (
+            <h3>Not authorized</h3>
+          )}
         </div>
+        {isAuth ? (
+          <Link to="/preview">
+            <Button variant="contained" color="secondary">
+              preview
+            </Button>
+          </Link>
+        ) : (
+          <h1>SVovka 2024</h1>
+        )}
+        <div>
+          {isAuth ? (
+            <Button variant="contained" color="warning" onClick={onClickLogOut}>
+              Log out
+            </Button>
+          ) : (
+            <Link to="/login">
+              <Button variant="contained">Log in</Button>
+            </Link>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

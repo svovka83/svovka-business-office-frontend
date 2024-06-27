@@ -1,9 +1,9 @@
 .header {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   text-align: center;
   align-items: center;
-  padding: 10px 0;
+  padding: 20px 0;
   background: #b4b4b4;
 }
 

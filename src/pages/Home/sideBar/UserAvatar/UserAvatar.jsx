@@ -2,6 +2,7 @@ import React from "react";
 
 import styles from "./UserAvatar.module.css";
 import { Button } from "@mui/material";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchUpdateAvatar,

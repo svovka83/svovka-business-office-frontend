@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import EmojiPicker from "emoji-picker-react";
 
 import styles from "./Chat.module.css";
 import { Button, TextField } from "@mui/material";
@@ -16,7 +15,6 @@ const Chat = () => {
   const [params, setParams] = React.useState({});
   const [message, setMessage] = React.useState("");
   const [messages, setMessages] = React.useState([]);
-  const [isOpen, setIsOpen] = React.useState(false);
 
   React.useEffect(() => {
     const searchParams = Object.fromEntries(new URLSearchParams(search));
@@ -52,30 +50,11 @@ const Chat = () => {
         <div className={styles.block}>
           <TextField
             className={styles.input}
-            onChange={(event) => setMessage(event.target.value)}
+            onChange={({ target: { value } }) => setMessage(value)}
             value={message}
             placeholder="input here your message"
             multiline
           />
-          <div>
-            <span
-              className={styles.smiles}
-              onClick={() => {
-                setIsOpen(!isOpen);
-              }}
-            >
-              😀
-            </span>
-            <span className={styles.emoji}>
-              {isOpen && (
-                <EmojiPicker
-                  onEmojiClick={({ emoji }) => {
-                    setMessage(`${message} ${emoji}`);
-                  }}
-                />
-              )}
-            </span>
-          </div>
           <Button
             onClick={handleChangeMessage}
             variant="contained"
