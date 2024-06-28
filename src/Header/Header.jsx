@@ -37,15 +37,32 @@ const Header = () => {
             <h3>Not authorized</h3>
           )}
         </div>
-        {isAuth ? (
-          <Link to="/preview">
-            <Button variant="contained" color="secondary">
-              preview
-            </Button>
-          </Link>
-        ) : (
-          <h1>SVovka 2024</h1>
-        )}
+        <div>
+          {isAuth ? (
+            <div>
+              <Link to="/framer_motion">
+                <Button variant="contained" color="secondary">
+                  motion
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <h1>SVovka 2024</h1>
+          )}
+        </div>
+        <div>
+          {isAuth ? (
+            <div>
+              {/* <Link to="/preview"> */}
+                <Button disabled variant="contained" color="secondary">
+                  preview
+                </Button>
+              {/* </Link> */}
+            </div>
+          ) : (
+            <h1>SVovka 2024</h1>
+          )}
+        </div>
         <div>
           {isAuth ? (
             <Button variant="contained" color="warning" onClick={onClickLogOut}>

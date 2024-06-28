@@ -6,6 +6,7 @@ import Header from "./Header/Header";
 import Start from "./pages/Start/Start";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
+import FramerMotion from "./pages/FramerMotion/FramerMotion";
 import Preview from "./pages/Preview/Preview";
 import Home from "./pages/Home/Home";
 import Footer from "./Footer/Footer";
@@ -33,6 +34,7 @@ function App() {
           <Route path="/" element={<Start />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
+          <Route path="/framer_motion" element={<FramerMotion />} />
           <Route path="/preview" element={<Preview />} />
           <Route path="/home/*" element={<Home />} />
         </Routes>

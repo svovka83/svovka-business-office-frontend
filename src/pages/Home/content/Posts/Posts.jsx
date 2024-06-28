@@ -7,7 +7,7 @@ import styles from "./Posts.module.css";
 import { Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import ScrollAnimation from "react-animate-on-scroll";
-import 'animate.css';
+import "animate.css";
 
 import {
   fetchGetAllPosts,
@@ -35,20 +35,22 @@ const Posts = () => {
       {posts.map((post, index) => (
         <ScrollAnimation
           key={post._id}
-          animateIn="animate__backInRight"
+          animateIn="animate__jello"
           offset={0}
           delay={index * 500}
         >
-          <div key={post._id}>
-            <Link to={`/home/posts/${post._id}`} className={styles.link}>
-              <Paper className={styles.paper} elevation={5}>
-                <b>author: {post.userName}</b>
-                <b>title: {post.title}</b>
-                <b>likes: ❤️ {post.likeCount}</b>
-                <b>views: 👁️‍🗨️ {post.viewCount}</b>
-              </Paper>
-            </Link>
-          </div>
+          <Link
+            to={`/home/posts/${post._id}`}
+            className={styles.link}
+            key={post._id}
+          >
+            <Paper className={styles.paper} elevation={5}>
+              <b>author: {post.userName}</b>
+              <b>title: {post.title}</b>
+              <b>likes: ❤️ {post.likeCount}</b>
+              <b>views: 👁️‍🗨️ {post.viewCount}</b>
+            </Paper>
+          </Link>
         </ScrollAnimation>
       ))}
     </div>
