@@ -34,7 +34,7 @@ function App() {
           <Route path="/" element={<Start />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
-          <Route path="/framer_motion" element={<FramerMotion />} />
+          <Route path="/framer_motion/*" element={<FramerMotion />} />
           <Route path="/preview" element={<Preview />} />
           <Route path="/home/*" element={<Home />} />
         </Routes>

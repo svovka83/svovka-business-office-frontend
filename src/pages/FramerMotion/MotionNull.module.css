@@ -1,0 +1,15 @@
+.motionNull {
+  background-color: rgb(24, 24, 24);
+  text-align: center;
+  padding: 50px 0;
+}
+
+.li {
+  list-style-type: none;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 22px;
+  color: white;
+}

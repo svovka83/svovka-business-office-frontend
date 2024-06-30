@@ -1,15 +1,14 @@
-import { motion } from "framer-motion";
+import Collapsible from "./Collapsible";
+import Filter from "./Filter";
 
-import styles from "./Start.module.css";
-import Collapsible from "../FramerMotion/MotionOne/Collapsible";
+import styles from "./MotionOne.module.css";
 
-const Start = () => {
+import { data } from "./data";
+
+const MotionOne = () => {
   return (
-    <div className={styles.start}>
-      <h1>Welcome!</h1>
-
-      <div className={styles.content}>
-      <Collapsible title="Відкрити опис" >
+    <div className={styles.motionOne}>
+      <Collapsible title="Animate Presence">
         <p className={styles.text}>
           Мета розробки проєкту спрямована на його функціонал. Використовуючи
           фреймворки та бібліотеки, поєднюючи взаємодію клієнтської та серверної
@@ -31,29 +30,10 @@ const Start = () => {
           розширенням. Деплой бекенду зробив на платформу Render, фронтенду - на
           Netlify.
         </p>
-        <p className={styles.ps}>
-          P.S. При реєстрації у полі пошти прописана валідація лише isEmail,
-          тому можна вводити фейковий.
-        </p>
-        <p className={styles.ps}>
-          P.S. Також на стартовій сторінці буде link на github repositories.
-        </p>
-        </Collapsible>
-        <motion.img
-        className={styles.start_image}
-        src="DSC00237.JPG"
-        alt="start content"
-        animate={{ rotateX: 360 }}
-        transition={{
-          delay: 2,
-          duration: 8,
-          repeat: Infinity,
-          repeatDelay: 2,
-        }}
-      />
-      </div>
+        <Filter data={data} />
+      </Collapsible>
     </div>
   );
 };
 
-export default Start;
+export default MotionOne;

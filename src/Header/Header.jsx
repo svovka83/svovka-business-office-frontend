@@ -19,7 +19,7 @@ const Header = () => {
     if (window.confirm(`${me.fullName} do you want logout?`)) {
       window.localStorage.removeItem("token");
       dispatch(logOut());
-      navigate("/login");
+      navigate("/");
     }
   };
 
@@ -50,19 +50,19 @@ const Header = () => {
             <h1>SVovka 2024</h1>
           )}
         </div>
-        <div>
+        {/* <div>
           {isAuth ? (
             <div>
-              {/* <Link to="/preview"> */}
+              <Link to="/preview">
                 <Button disabled variant="contained" color="secondary">
                   preview
                 </Button>
-              {/* </Link> */}
+              </Link>
             </div>
           ) : (
             <h1>SVovka 2024</h1>
           )}
-        </div>
+        </div> */}
         <div>
           {isAuth ? (
             <Button variant="contained" color="warning" onClick={onClickLogOut}>
