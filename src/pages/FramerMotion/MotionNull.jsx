@@ -6,7 +6,7 @@ import styles from "./MotionNull.module.css";
 
 const item = [
   "AnimatePresence",
-  "AnimateSharedLayout",
+  "layoutId",
   "framer_motion_3",
   "framer_motion_4",
   "framer_motion_5",

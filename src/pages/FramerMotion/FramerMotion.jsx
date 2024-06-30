@@ -9,7 +9,7 @@ const FramerMotion = () => {
       <Routes>
         <Route path="/" element={<MotionNull />} />
         <Route path="/AnimatePresence" element={<MotionOne />} />
-        <Route path="/AnimateSharedLayout" element={<MotionTwo />} />
+        <Route path="/layoutId" element={<MotionTwo />} />
       </Routes>
     </div>
   );

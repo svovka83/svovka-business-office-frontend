@@ -5,9 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Button from "./Button";
 
 const Filter = ({ data }) => {
-  const [cards, setCards] = useState(
-    data.filter((el) => el.category === "frontend")
-  );
+  const [cards, setCards] = useState(data);
 
   const buttons = data.reduce((acc, el) => {
     if (acc.includes(el.category)) {
@@ -15,10 +13,11 @@ const Filter = ({ data }) => {
     } else {
       return [...acc, el.category];
     }
-  }, []);
+  }, ["all"]);
   console.log(cards, buttons);
 
   const handleFilter = (selector) => {
+    if (selector === "all") return setCards(data) 
     setCards(data.filter((el) => el.category === selector));
   };
 
@@ -35,17 +34,18 @@ const Filter = ({ data }) => {
           />
         ))}
       </div>
-      <div style={{ display: "flex", justifyContent: "center", }}>
-        <AnimatePresence initial={false} mode='wait'>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <AnimatePresence initial={false} mode="wait">
           {cards.map((el) => (
             <motion.div
+            layout
               key={el.title}
               style={boxStyle}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{
-                duration: 2,
+                duration: 1,
               }}
             >
               {el.title}
