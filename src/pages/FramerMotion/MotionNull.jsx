@@ -7,7 +7,7 @@ import styles from "./MotionNull.module.css";
 const item = [
   "AnimatePresence",
   "layoutId",
-  "framer_motion_3",
+  "viewport",
   "framer_motion_4",
   "framer_motion_5",
 ];
