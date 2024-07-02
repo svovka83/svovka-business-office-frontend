@@ -1,0 +1,11 @@
+.motionFour {
+  background-color: rgb(24, 24, 24);
+  text-align: center;
+  padding: 50px 0;
+}
+
+.todos {
+  width: 50%;
+  background-color: aliceblue;
+  color: white
+}

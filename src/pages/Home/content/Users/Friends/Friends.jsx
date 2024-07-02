@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import { motion } from "framer-motion";
+
 import styles from "./Friends.module.css";
 import { Avatar, Button, Paper } from "@mui/material";
 
@@ -12,6 +14,16 @@ import {
   selectorMyFriends,
 } from "../../../../../redux/slices/usersSlice";
 import { serverURL } from "../../../../../axios";
+
+const friendsAnimate = {
+  hidden: { x: 200, opacity: 0, scale: 0.5 },
+  visible: (index) => ({
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1, delay: index * 1 },
+  }),
+};
 
 const Friends = () => {
   const dispatch = useDispatch();
@@ -37,9 +49,15 @@ const Friends = () => {
         </div>
         {users
           .filter((f) => friends.includes(f._id))
-          .map((users) => (
+          .map((users, index) => (
             <Link to={`/home/users/${users._id}`} key={users._id}>
-              <div className={styles.users}>
+              <motion.div
+                initial={"hidden"}
+                animate={"visible"}
+                variants={friendsAnimate}
+                custom={index}
+                className={styles.users}
+              >
                 <Paper className={styles.paper} elevation={5}>
                   <h3>{users.fullName}</h3>
                   <p>
@@ -68,7 +86,7 @@ const Friends = () => {
                     </i>
                   </p>
                 </Paper>
-              </div>
+              </motion.div>
             </Link>
           ))}
       </div>

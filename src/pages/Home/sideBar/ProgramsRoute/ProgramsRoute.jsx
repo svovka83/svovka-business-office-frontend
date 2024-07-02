@@ -8,7 +8,7 @@ import "animate.css";
 const ProgramsRoute = () => {
   return (
     <div className={styles.side_bar}>
-      <ScrollAnimation animateIn="animate__zoomIn" offset={0} delay={300}>
+      <ScrollAnimation animateIn="animate__zoomIn" delay={300}>
         <Link to="/home/programs/calculator">
           <Button
             variant="contained"
@@ -27,6 +27,17 @@ const ProgramsRoute = () => {
             className={styles.button_size}
           >
             Timer
+          </Button>
+        </Link>
+        <br />
+        <br />
+        <Link to="/home/programs/capitals">
+          <Button
+            variant="contained"
+            color="info"
+            className={styles.button_size}
+          >
+            Capitals
           </Button>
         </Link>
         <br />

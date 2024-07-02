@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import styles from "./MotionTwo.module.css";
 
-const menuData = ["React", "Express", "MongoDB", "axios"];
+const menuData = ["React", "Express", "axios"];
 
 const MotionTwo = () => {
   const [activeIndex, setActive] = useState(0);

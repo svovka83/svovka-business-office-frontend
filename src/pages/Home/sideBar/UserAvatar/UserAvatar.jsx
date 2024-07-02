@@ -35,7 +35,7 @@ const UserAvatar = () => {
             alt="avatar"
           />
         ) : (
-          <img className={styles.avatar} src="logo192.png" alt="avatar" />
+          <img className={styles.avatar} src="/logo192.png" alt="avatar" />
         )}
       </div>
       <br />

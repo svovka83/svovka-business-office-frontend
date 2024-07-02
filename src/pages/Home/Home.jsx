@@ -30,6 +30,7 @@ import Post from "./content/Posts/Post/Post";
 
 import Calculator from "./content/ProgramsContent/Calculator/Calculator";
 import Timer from "./content/ProgramsContent/Timer/Timer";
+import Capitals from "./content/ProgramsContent/Capitals/Capitals";
 
 import ChatForm from "./content/ChatContent/ChatForm";
 import Chat from "./content/ChatContent/Chat/Chat";
@@ -74,6 +75,7 @@ const Home = () => {
 
               <Route path="/programs/calculator" element={<Calculator />} />
               <Route path="/programs/timer" element={<Timer />} />
+              <Route path="/programs/capitals" element={<Capitals />} />
 
               <Route path="/chat_form" element={<ChatForm />} />
               <Route path="/chat" element={<Chat />} />

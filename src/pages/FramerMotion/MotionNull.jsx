@@ -7,12 +7,16 @@ import styles from "./MotionNull.module.css";
 const item = [
   "AnimatePresence",
   "layoutId",
-  "viewport",
-  "framer_motion_4",
+  "whileInView",
+  "Reorder",
   "framer_motion_5",
 ];
 
 const listVariants = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+  },
   visible: (index) => ({
     opacity: 1,
     y: 0,
@@ -21,10 +25,6 @@ const listVariants = {
       delay: index * 1,
     },
   }),
-  hidden: {
-    opacity: 0,
-    y: 100,
-  },
 };
 
 const MotionNull = () => {
