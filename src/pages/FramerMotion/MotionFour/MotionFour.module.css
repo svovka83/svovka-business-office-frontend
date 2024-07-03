@@ -4,8 +4,14 @@
   padding: 50px 0;
 }
 
-.todos {
-  width: 50%;
+.todos {display: flex;
+  justify-content: space-around;
   background-color: aliceblue;
-  color: white
+  color: blue;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 20px;
+  margin: 20px 20%;
+  padding: 10px 0;
+  cursor: pointer;
 }
