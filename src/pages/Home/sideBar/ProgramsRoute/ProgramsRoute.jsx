@@ -8,7 +8,7 @@ import "animate.css";
 const ProgramsRoute = () => {
   return (
     <div className={styles.side_bar}>
-      <ScrollAnimation animateIn="animate__zoomIn" delay={300}>
+      <ScrollAnimation animateIn="animate__zoomIn" offset={0} delay={300}>
         <Link to="/home/programs/calculator">
           <Button
             variant="contained"

@@ -47,22 +47,22 @@ const Header = () => {
               </Link>
             </div>
           ) : (
-            <h1>SVovka 2024</h1>
+            <h1>SVovka</h1>
           )}
         </div>
-        {/* <div>
+        <div>
           {isAuth ? (
             <div>
               <Link to="/preview">
-                <Button disabled variant="contained" color="secondary">
+                <Button variant="contained" color="secondary">
                   preview
                 </Button>
               </Link>
             </div>
           ) : (
-            <h1>SVovka 2024</h1>
+            <h1>2024</h1>
           )}
-        </div> */}
+        </div>
         <div>
           {isAuth ? (
             <Button variant="contained" color="warning" onClick={onClickLogOut}>

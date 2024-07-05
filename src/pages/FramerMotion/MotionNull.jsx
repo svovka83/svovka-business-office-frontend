@@ -9,7 +9,6 @@ const item = [
   "layoutId",
   "whileInView",
   "Reorder",
-  "MotionValues",
 ];
 
 const listVariants = {

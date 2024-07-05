@@ -26,8 +26,8 @@ const Login = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: "guest@gmail.com",
+      password: "1234",
     },
     mode: "onBlur",
   });
