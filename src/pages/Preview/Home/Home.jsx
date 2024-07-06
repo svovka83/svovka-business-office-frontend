@@ -6,6 +6,10 @@ const Home = () => {
     <div  className="text-align">
       <MainBanner />
       <WorkWithContentful />
+      <WorkPlaceBanner />
+      <MainBanner />
+      <MainBanner />
+      <MainBanner />
     </div>
   );
 };

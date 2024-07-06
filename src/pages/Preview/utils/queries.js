@@ -1,13 +1,15 @@
-export const contentfulQuery = `
-{
-    query {
-      items {
+export const authorCollectionQuery = `{
+  authorCollection {
+    items {
+      title
+      picture {
         title
-        picture
-        sys {
-          id
-        }
+        fileName
+      }
+      text
+      sys {
+        id
       }
     }
-}
-`;
+  }
+}`

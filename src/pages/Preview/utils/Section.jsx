@@ -6,7 +6,7 @@ const Section = ({ children }) => {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end end"],
+    offset: ["1 0", "0 0"],
   });
 
   return (

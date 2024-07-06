@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { contentfulQuery } from "../../pages/Preview/utils/queries";
 import { request } from "../../pages/Preview/utils/fetchContentful";
+import { authorCollectionQuery } from "../../pages/Preview/utils/queries";
 
 export const fetchGetContentful = createAsyncThunk(
   "contentful/fetchGetContentful",
   async (_, thunkAPI) => {
     try {
-      const data = await request(contentfulQuery);
+      const data = await request(authorCollectionQuery);
       console.log("data", data);
+      const { items } = data.authorCollection;
+      return items;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
     }
@@ -23,7 +25,10 @@ const contentfulSlice = createSlice({
   name: "contentful",
   initialState,
   reducers: {},
-  selectors: {},
+  selectors: {
+    contentfulItems: (state) => state.items,
+    contentfulIsLoading: (state) => state.isLoading,
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchGetContentful.pending, (state) => {
       state.isLoading = true;
@@ -38,4 +43,5 @@ const contentfulSlice = createSlice({
   },
 });
 
-export const contentfulReducer = contentfulSlice.reducer; 
+export const { contentfulItems, contentfulIsLoading } = contentfulSlice.selectors;
+export const contentfulReducer = contentfulSlice.reducer;

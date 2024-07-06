@@ -1,14 +1,23 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import SectionTitle from "../utils/SectionTitle";
-
 import Section from "../utils/Section";
 
-import { fetchGetContentful } from "../../../redux/slices/contentfulSlice";
+import Items from "./Items";
+
+import {
+  contentfulIsLoading,
+  contentfulItems,
+  fetchGetContentful,
+} from "../../../redux/slices/contentfulSlice";
+
+import Circular from "../../../utils/CircularProgress";
 
 const WorkWithContentful = () => {
   const dispatch = useDispatch();
+  const items = useSelector(contentfulItems);
+  const isLoading = useSelector(contentfulIsLoading);
 
   React.useEffect(() => {
     dispatch(fetchGetContentful());
@@ -17,12 +26,12 @@ const WorkWithContentful = () => {
   return (
     <div>
       <Section>
-        <SectionTitle title="Contentful 1" />
-        <img src="logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <SectionTitle title="Contentful 2" />
-        <img src="logo192.png" alt="12345" />
+        <SectionTitle title="Contentful" />
+        {isLoading ? (
+          <Circular />
+        ) : (
+          items.map((items, index) => <Items items={items} index={index} />)
+        )}
       </Section>
     </div>
   );
