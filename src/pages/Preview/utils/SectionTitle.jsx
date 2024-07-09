@@ -4,10 +4,10 @@ const SectionTitle = ({ title }) => {
   return (
     <ScrollAnimation
       animateIn="animate__fadeInLeft"
-      animateOut="animate__fadeOutRight"
-      offset={100}
+      animateOut="animate__fadeOutLeft"
+      offset={70}
     >
-      <h2>{title}</h2>
+      <h2 className="title">{title}</h2>
     </ScrollAnimation>
   );
 };

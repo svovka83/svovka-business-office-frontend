@@ -3,7 +3,9 @@ import { usersReducer } from "./slices/usersSlice";
 import { postsReducer } from "./slices/postsSlice";
 import { commentsReducer } from "./slices/commentsSlice";
 import { dialogsReducer } from "./slices/dialogsSlice";
-import { contentfulReducer } from "./slices/contentfulSlice";
+
+import { contentfulTextReducer } from "./slices/contentfulTextSlice";
+import { contentfulAudioReducer } from "./slices/contentfulAudioSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,7 +13,9 @@ const store = configureStore({
     posts: postsReducer,
     comments: commentsReducer,
     dialogs: dialogsReducer,
-    contentful: contentfulReducer,
+
+    contentfulText: contentfulTextReducer,
+    contentfulAudio: contentfulAudioReducer,
   },
 });
 

@@ -1,11 +1,13 @@
 import Section from "../utils/Section";
 import SectionTitle from "../utils/SectionTitle";
 
+import Banner from "../images/4276167_2220328.jpg";
+
 const MainBanner = () => {
   return (
     <Section>
-      <SectionTitle title="MY WORKPLACE" />
-      <img src="logo192.png" alt="12345" />
+      <SectionTitle title="SVovka" />
+      <img className="banner" src={Banner} alt="MainBanner" />
     </Section>
   );
 };

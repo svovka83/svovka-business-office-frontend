@@ -5,6 +5,7 @@ export const authorCollectionQuery = `{
       picture {
         title
         fileName
+        url
       }
       text
       sys {
@@ -12,4 +13,20 @@ export const authorCollectionQuery = `{
       }
     }
   }
-}`
+}`;
+
+export const mediaCollectionQuery = `{
+  mediaCollection {
+    items {
+      title
+      music {
+        title
+        fileName
+        url
+      }
+      sys {
+        id
+      }
+    }
+  }
+}`;

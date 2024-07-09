@@ -1,8 +1,23 @@
+.banner {
+  width: 70%;
+  height: 450px;
+}
+
 .text-align {
-    text-align: center;
+  text-align: center;
 }
 
 .grid_2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid_3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.video {
+  width: 60%;
+  border: 5px solid snow;
 }

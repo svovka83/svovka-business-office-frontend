@@ -1,53 +1,36 @@
-import Section from "../utils/Section";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import SectionGallery from "../utils/SectionGallery";
+
+import { fetchGetContentfulText } from "../../../redux/slices/contentfulTextSlice";
+import { contentfulItemsText } from "../../../redux/slices/contentfulTextSlice";
+import SectionTitle from "../utils/SectionTitle";
 
 const Gallery = () => {
+  const dispatch = useDispatch();
+  const items = useSelector(contentfulItemsText);
+
+  React.useEffect(() => {
+    dispatch(fetchGetContentfulText());
+  }, [dispatch]);
+
   return (
     <div className="text-align">
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-      <Section>
-        <h1 style={{ fontSize: 16, lineHeight: 0 }}>SVOVKA</h1>
-        <img src="/logo192.png" alt="12345" />
-      </Section>
-
+      <ul>
+        {items.map((items) => (
+          <SectionGallery>
+            <li key={items.sys.id}>
+              <SectionTitle title={items.title} />
+              <img
+                src={items.picture.url}
+                alt={items.picture.fileName}
+                className="banner"
+              />
+            </li>
+          </SectionGallery>
+        ))}
+      </ul>
     </div>
   );
 };

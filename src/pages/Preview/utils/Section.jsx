@@ -6,12 +6,17 @@ const Section = ({ children }) => {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["1 0", "0 0"],
+    offset: ["0 1", "0.8 1"],
   });
 
   return (
     <section ref={ref}>
-      <motion.div style={{ scale: scrollYProgress, opacity: scrollYProgress }}>
+      <motion.div
+        style={{
+          scale: scrollYProgress,
+          opacity: scrollYProgress,
+        }}
+      >
         {children}
       </motion.div>
     </section>
