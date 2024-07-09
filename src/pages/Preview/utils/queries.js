@@ -19,6 +19,9 @@ export const mediaCollectionQuery = `{
   mediaCollection {
     items {
       title
+      picture {
+        url
+      }
       music {
         title
         fileName

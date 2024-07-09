@@ -1,6 +1,24 @@
+@import "./variables.scss";
+
 .banner {
   width: 70%;
   height: 450px;
+}
+
+.banner-swiper {
+  width: 80%;
+  cursor: pointer;
+}
+
+.audio {
+  width: 45%;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.playing {
+  font-size: 24px;
+  color: $action;
 }
 
 .text-align {
@@ -15,6 +33,7 @@
 .grid_3 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
 }
 
 .video {

@@ -14,6 +14,7 @@ const Section = ({ children }) => {
       <motion.div
         style={{
           scale: scrollYProgress,
+          scaleY: scrollYProgress,
           opacity: scrollYProgress,
         }}
       >

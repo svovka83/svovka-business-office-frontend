@@ -4,11 +4,11 @@ import Socials from "./Socials";
 
 const Header = () => {
   return (
-      <div className="header">
-        <Logo />
-        <Menu />
-        <Socials />
-      </div>
+    <div className="header">
+      <Logo />
+      <Menu />
+      <Socials />
+    </div>
   );
 };
 

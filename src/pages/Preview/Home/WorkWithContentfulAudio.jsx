@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { motion } from "framer-motion";
+
 import SectionTitle from "../utils/SectionTitle";
 import Section from "../utils/Section";
 
@@ -25,7 +27,17 @@ const WorkWithContentfulAudio = () => {
     dispatch(fetchGetContentfulAudio());
   }, [dispatch]);
 
-  const HandleTrackClick = () => {}
+  const HandleTrackClick = (items) => {
+    setPlaying((prev) => {
+      const isPlaying = items.sys.id === currentTrack?.sys?.id ? !prev : null;
+
+      audio.src = items.music.url;
+      !isPlaying ? audio.pause() : audio.play();
+
+      return isPlaying;
+    });
+    setCurrentTrack(items);
+  };
 
   return (
     <div>
@@ -36,18 +48,30 @@ const WorkWithContentfulAudio = () => {
         ) : (
           <div>
             {items.map((items) => (
-              <div className="grid_3" key={items.sys.id}>
+              <motion.div
+                initial={{ x: -300, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{
+                  duration: 1.8,
+                }}
+                className="grid_3"
+                key={items.sys.id}
+              >
                 <h3>{items.title}</h3>
-                <p>
-                  {items.music.title}
-                  {items.music.url}
-                </p>
-                <img onClick={HandleTrackClick}
-                  src={items.music.url}
-                  alt={items.title}
-                  className="banner"
-                />
-              </div>
+                <div>
+                  <img
+                    onClick={() => HandleTrackClick(items)}
+                    src={items.picture.url}
+                    alt={items.title}
+                    className="audio"
+                  />
+                </div>
+                {!!playing && items.sys.id === currentTrack.sys.id ? (
+                  <span className="playing">Playing 🎶</span>
+                ) : (
+                  <p>{items.music.title}</p>
+                )}
+              </motion.div>
             ))}
           </div>
         )}

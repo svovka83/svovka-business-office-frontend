@@ -7,16 +7,8 @@ export const MENU = [
     link: "/preview/gallery",
   },
   {
-    name: "SomeName2",
-    link: "/link2",
-  },
-  {
-    name: "SomeName3",
-    link: "/link3",
-  },
-  {
-    name: "SomeName4",
-    link: "/link4",
+    name: "Quiz",
+    link: "/home/programs/capitals",
   },
 ];
 
